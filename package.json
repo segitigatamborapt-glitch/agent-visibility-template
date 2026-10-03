@@ -1,10 +1,11 @@
 {
-	"name": "pandu-company-website",
-	"description": "Situs web perusahaan konstruksi Pandu.",
+	"name": "segi-tiga-tambora-website",
+	"description": "Situs web PT. Segi Tiga Tambora.",
 	"dependencies": {
 		"hono": "4.11.1",
 		"react": "19.2.1",
-		"react-dom": "19.2.1"
+		"react-dom": "19.2.1",
+		"react-router": "^7.18.4"
 	},
 	"devDependencies": {
 		"@cloudflare/vite-plugin": "1.52.1",

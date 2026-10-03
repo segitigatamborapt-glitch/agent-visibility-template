@@ -1,6 +1,6 @@
-# AGENTS.md — Situs Perusahaan Pandu
+# AGENTS.md — Situs PT. Segi Tiga Tambora
 
-Situs web perusahaan konstruksi Pandu. Bahasa antarmuka: Indonesia.
+Situs web perusahaan konstruksi PT. Segi Tiga Tambora. Data perusahaan (nama, menu) ada di `src/react-app/site.ts`. Bahasa antarmuka: Indonesia.
 
 ## Arsitektur
 

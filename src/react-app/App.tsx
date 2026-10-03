@@ -1,10 +1,24 @@
+import { BrowserRouter, Route, Routes } from "react-router";
 import "./App.css";
+import Layout from "./components/Layout";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import Services from "./pages/Services";
 
 export default function App() {
 	return (
-		<main className="placeholder">
-			<h1>Pandu</h1>
-			<p>Situs perusahaan konstruksi — sedang dibangun.</p>
-		</main>
+		<BrowserRouter>
+			<Routes>
+				<Route element={<Layout />}>
+					<Route index element={<Home />} />
+					<Route path="tentang" element={<About />} />
+					<Route path="layanan" element={<Services />} />
+					<Route path="kontak" element={<Contact />} />
+					<Route path="*" element={<NotFound />} />
+				</Route>
+			</Routes>
+		</BrowserRouter>
 	);
 }

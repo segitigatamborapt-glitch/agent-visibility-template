@@ -1,6 +1,6 @@
-# Pandu — Situs Perusahaan Konstruksi
+# PT. Segi Tiga Tambora — Situs Perusahaan
 
-Situs web perusahaan Pandu, dibangun dengan React (Vite) dan Cloudflare Workers (Hono).
+Situs web PT. Segi Tiga Tambora, dibangun dengan React (Vite) dan Cloudflare Workers (Hono).
 
 ## Menjalankan
 
