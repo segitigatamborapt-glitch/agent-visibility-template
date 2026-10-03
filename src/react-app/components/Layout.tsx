@@ -4,12 +4,13 @@ import { contact, navItems, site } from "../site";
 import Logo from "./Logo";
 
 const hoverCapable = () =>
-	window.matchMedia("(hover: hover) and (min-width: 900px)").matches;
+	window.matchMedia("(hover: hover) and (min-width: 1000px)").matches;
 
 export default function Layout() {
 	const { pathname } = useLocation();
 	const [open, setOpen] = useState<string | null>(null);
 	const [mobileOpen, setMobileOpen] = useState(false);
+	const [scrolled, setScrolled] = useState(false);
 	const headerRef = useRef<HTMLElement>(null);
 
 	useEffect(() => {
@@ -17,6 +18,13 @@ export default function Layout() {
 		setMobileOpen(false);
 		window.scrollTo(0, 0);
 	}, [pathname]);
+
+	useEffect(() => {
+		const onScroll = () => setScrolled(window.scrollY > 8);
+		onScroll();
+		window.addEventListener("scroll", onScroll, { passive: true });
+		return () => window.removeEventListener("scroll", onScroll);
+	}, []);
 
 	useEffect(() => {
 		const onClick = (e: MouseEvent) => {
@@ -28,12 +36,15 @@ export default function Layout() {
 
 	return (
 		<>
+			<a className="skip-link" href="#konten">
+				Lewati ke konten
+			</a>
 			<header
-				className="site-header"
+				className={`site-header${scrolled ? " is-scrolled" : ""}`}
 				ref={headerRef}
 				onKeyDown={(e) => e.key === "Escape" && setOpen(null)}
 			>
-				<div className="header-inner">
+				<div className="container header-inner">
 					<Link to="/" className="brand">
 						<Logo />
 						<span>{site.name}</span>
@@ -93,17 +104,17 @@ export default function Layout() {
 					</nav>
 				</div>
 			</header>
-			<main>
+			<main id="konten">
 				<Outlet />
 			</main>
 			<footer className="site-footer">
 				<div className="container footer-grid">
 					<div>
-						<strong>{site.name}</strong>
+						<h2 className="footer-title">{site.name}</h2>
 						<p>{site.tagline}</p>
 					</div>
 					<div>
-						<strong>Menu</strong>
+						<h2 className="footer-title">Menu</h2>
 						<ul>
 							{navItems.map((item) => (
 								<li key={item.label}>
@@ -117,7 +128,7 @@ export default function Layout() {
 						</ul>
 					</div>
 					<div>
-						<strong>Kontak</strong>
+						<h2 className="footer-title">Kontak</h2>
 						<p>{contact.address}</p>
 						<p>{contact.email}</p>
 						<p>{contact.phone}</p>

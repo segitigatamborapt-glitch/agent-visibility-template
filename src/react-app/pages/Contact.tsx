@@ -1,20 +1,33 @@
+import Icon from "../components/Icon";
+import PageHeader from "../components/PageHeader";
 import Sample from "../components/Sample";
 import { contact } from "../site";
 
+const rows = [
+	{ icon: "pin", label: "Alamat", value: contact.address },
+	{ icon: "mail", label: "Email", value: contact.email },
+	{ icon: "phone", label: "Telepon", value: contact.phone },
+] as const;
+
 export default function Contact() {
 	return (
-		<section className="container page">
-			<h1>Kontak</h1>
-			<Sample />
-			<dl className="contact-list">
-				<dt>Alamat</dt>
-				<dd>{contact.address}</dd>
-				<dt>Email</dt>
-				<dd>{contact.email}</dd>
-				<dt>Telepon</dt>
-				<dd>{contact.phone}</dd>
-			</dl>
-			<p>Formulir kontak akan ditambahkan pada langkah berikutnya.</p>
-		</section>
+		<>
+			<PageHeader title="Kontak" />
+			<section className="container section">
+				<Sample />
+				<div className="cards">
+					{rows.map((r) => (
+						<article key={r.label} className="card">
+							<span className="icon-badge">
+								<Icon name={r.icon} />
+							</span>
+							<h3>{r.label}</h3>
+							<p>{r.value}</p>
+						</article>
+					))}
+				</div>
+				<p>Formulir kontak akan ditambahkan pada langkah berikutnya.</p>
+			</section>
+		</>
 	);
 }

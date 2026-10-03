@@ -70,47 +70,82 @@ export const navLeaves: NavChild[] = navItems.flatMap((item) =>
 	item.children ? item.children : item.to ? [{ label: item.label, to: item.to }] : [],
 );
 
+export type IconName =
+	| "building"
+	| "road"
+	| "structure"
+	| "bolt"
+	| "wrench"
+	| "truck";
+
 // CONTOH — sesuaikan dengan bidang usaha sebenarnya.
-export const businessLines = [
+export const businessLines: {
+	title: string;
+	desc: string;
+	icon: IconName;
+}[] = [
 	{
 		title: "Konstruksi Gedung",
 		desc: "Perkantoran, hunian, dan fasilitas umum.",
+		icon: "building",
 	},
 	{
 		title: "Infrastruktur",
 		desc: "Jalan, jembatan, dan drainase.",
+		icon: "road",
 	},
 	{
 		title: "Sipil & Struktur",
 		desc: "Pondasi, struktur beton, dan baja.",
+		icon: "structure",
 	},
 	{
 		title: "Mekanikal & Elektrikal",
 		desc: "Instalasi MEP untuk bangunan dan industri.",
+		icon: "bolt",
 	},
 	{
 		title: "Renovasi & Perawatan",
 		desc: "Perbaikan dan peningkatan bangunan existing.",
+		icon: "wrench",
 	},
 	{
 		title: "Penyewaan Alat Berat",
 		desc: "Dukungan peralatan untuk proyek konstruksi.",
+		icon: "truck",
 	},
 ];
 
-// CONTOH — ganti dengan angka nyata perusahaan.
+// Nilai perusahaan — diturunkan dari tagline; sesuaikan.
+export const values = [
+	{
+		title: "Mutu",
+		desc: "Standar kualitas yang konsisten di setiap tahap pekerjaan.",
+	},
+	{
+		title: "Ketepatan Waktu",
+		desc: "Perencanaan dan pengendalian jadwal yang disiplin.",
+	},
+	{
+		title: "Keselamatan Kerja",
+		desc: "Keselamatan dan kesehatan kerja sebagai prioritas utama.",
+	},
+];
+
+// Isi `value` dengan angka nyata (mis. "15+"); bagian ini disembunyikan
+// otomatis selama semua nilainya masih kosong.
 export const stats = [
-	{ value: "—", label: "Tahun Pengalaman" },
-	{ value: "—", label: "Proyek Selesai" },
-	{ value: "—", label: "Tenaga Ahli" },
-	{ value: "—", label: "Klien" },
+	{ value: "", label: "Tahun Pengalaman" },
+	{ value: "", label: "Proyek Selesai" },
+	{ value: "", label: "Tenaga Ahli" },
+	{ value: "", label: "Klien" },
 ];
 
 // CONTOH — ganti dengan proyek nyata.
 export const projects = [
-	{ title: "Nama Proyek 1", meta: "Kategori · Lokasi · Tahun" },
-	{ title: "Nama Proyek 2", meta: "Kategori · Lokasi · Tahun" },
-	{ title: "Nama Proyek 3", meta: "Kategori · Lokasi · Tahun" },
+	{ title: "Nama Proyek 1", category: "Kategori", meta: "Lokasi · Tahun" },
+	{ title: "Nama Proyek 2", category: "Kategori", meta: "Lokasi · Tahun" },
+	{ title: "Nama Proyek 3", category: "Kategori", meta: "Lokasi · Tahun" },
 ];
 
 // CONTOH — ganti dengan data kontak nyata.
