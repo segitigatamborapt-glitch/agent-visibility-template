@@ -17,3 +17,18 @@ npm run deploy   # build + wrangler deploy
 - `src/react-app/` — antarmuka situs (React)
 - `src/worker/index.ts` — API Worker (Hono), rute di bawah `/api/*`
 - `test/` — tes Worker (vitest-pool-workers)
+
+## Mengisi data perusahaan
+
+Semua data ada di `src/react-app/site.ts`. Bagian bertanda `CONTOH` masih berupa placeholder.
+
+| Yang diisi | Di mana |
+| --- | --- |
+| Logo | Taruh file di `public/`, lalu isi `site.logo` (mis. `"/logo.png"`) |
+| Kontak (alamat, email, telepon) | `contact` |
+| Bidang usaha | `businessLines` |
+| Proyek | `projects` |
+| Angka keunggulan | `stats` (isi `value`; bagian ini tampil otomatis saat ada nilainya) |
+| Menu dan submenu | `navItems` |
+
+Halaman Profil Perusahaan ada di `src/react-app/pages/About.tsx`; halaman submenu lain memakai `InfoPage.tsx` sebagai placeholder sampai isinya dibuat.

@@ -1,4 +1,17 @@
+import { site } from "../site";
+
 export default function Logo() {
+	if (site.logo) {
+		return (
+			<img
+				className="logo-img"
+				src={site.logo}
+				alt=""
+				height={40}
+				style={{ height: 40, width: "auto" }}
+			/>
+		);
+	}
 	return (
 		<svg
 			className="logo-mark"
@@ -8,7 +21,7 @@ export default function Logo() {
 			aria-hidden="true"
 		>
 			<polygon points="20,4 37,35 3,35" fill="#f28c28" />
-			<polygon points="20,15 29,31 11,31" fill="#12263f" />
+			<polygon points="20,15 29,31 11,31" fill="#0f2a47" />
 		</svg>
 	);
 }
