@@ -11,7 +11,7 @@ export default function Home() {
 					<h1>{site.name}</h1>
 					<p className="lead">{site.tagline}</p>
 					<div className="hero-actions">
-						<Link className="button" to="/layanan">
+						<Link className="button" to="/lini-bisnis">
 							Bidang Usaha
 						</Link>
 						<Link className="button button-ghost" to="/kontak">
