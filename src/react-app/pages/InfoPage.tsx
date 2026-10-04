@@ -12,9 +12,11 @@ export default function InfoPage() {
 	return (
 		<>
 			<PageHeader title={leaf.label} parent={parent?.label} />
-			<section className="container section prose">
+			<section className="container section">
+				<div className="prose">
 				<Sample />
 				<p>Halaman ini sedang disiapkan.</p>
+				</div>
 			</section>
 		</>
 	);
