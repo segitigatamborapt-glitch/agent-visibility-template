@@ -173,6 +173,16 @@ export const experience: Experience[] = [
 		category: "jalan-jembatan",
 	},
 	{
+		title: "Peningkatan Jalan Asphalt Hot Mix AC-BC Poros Amesiu – Meluhu",
+		location: "Poros Amesiu – Meluhu",
+		client: "Pemerintah Daerah Kabupaten Konawe",
+		province: "Sulawesi Tenggara",
+		start: "2019-08-30",
+		end: "2019-12-28",
+		value: 9082880000,
+		category: "jalan-jembatan",
+	},
+	{
 		title: "Rehabilitasi dan Renovasi Sarana dan Prasarana Sekolah Kab. Konawe, Kab. Kolaka Utara, Kab. Konawe Utara",
 		location: "Kabupaten Konawe",
 		client: "PT. Roda Indah Perkasa",
