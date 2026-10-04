@@ -31,4 +31,6 @@ Semua data ada di `src/react-app/site.ts`. Bagian bertanda `CONTOH` masih berupa
 | Angka keunggulan | `stats` (isi `value`; bagian ini tampil otomatis saat ada nilainya) |
 | Menu dan submenu | `navItems` |
 
+Logo alternatif bergaya lencana: `public/logo-lencana.svg` (untuk stempel, papan nama, media sosial; teks di dalamnya terlalu kecil untuk header).
+
 Halaman Profil Perusahaan ada di `src/react-app/pages/About.tsx`; halaman submenu lain memakai `InfoPage.tsx` sebagai placeholder sampai isinya dibuat.
