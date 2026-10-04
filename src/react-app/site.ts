@@ -65,17 +65,11 @@ export const navItems: NavItem[] = [
 		],
 	},
 	{
-		label: "GCG",
+		label: "Keselamatan & Mutu",
 		children: [
-			{ label: "Pedoman GCG", to: "/gcg/pedoman" },
-			{ label: "Pelaporan Pelanggaran", to: "/gcg/pelaporan-pelanggaran" },
-		],
-	},
-	{
-		label: "ESG",
-		children: [
-			{ label: "Keberlanjutan", to: "/esg/keberlanjutan" },
-			{ label: "K3 & Lingkungan", to: "/esg/k3-lingkungan" },
+			{ label: "Kebijakan K3 / SMKK", to: "/keselamatan-mutu/k3-smkk" },
+			{ label: "Kebijakan Mutu", to: "/keselamatan-mutu/mutu" },
+			{ label: "Kebijakan Lingkungan", to: "/keselamatan-mutu/lingkungan" },
 		],
 	},
 	{

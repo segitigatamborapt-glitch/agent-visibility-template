@@ -221,7 +221,7 @@ a:hover {
 	font-weight: 600;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1280px) {
 	.menu-toggle {
 		display: none;
 	}
@@ -245,7 +245,7 @@ a:hover {
 	.nav > li > button {
 		border-bottom: 0;
 		width: auto;
-		padding: 24px 10px;
+		padding: 24px 8px;
 		white-space: nowrap;
 	}
 	.dropdown {
@@ -721,7 +721,7 @@ a:hover {
 }
 
 /* Header ponsel: nama perusahaan boleh dua baris agar tombol Menu tetap sebaris */
-@media (max-width: 999px) {
+@media (max-width: 1279px) {
 	.brand {
 		flex-shrink: 1;
 		min-width: 0;

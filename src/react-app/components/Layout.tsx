@@ -4,7 +4,7 @@ import { contact, navItems, site } from "../site";
 import Logo from "./Logo";
 
 const hoverCapable = () =>
-	window.matchMedia("(hover: hover) and (min-width: 1000px)").matches;
+	window.matchMedia("(hover: hover) and (min-width: 1280px)").matches;
 
 export default function Layout() {
 	const { pathname } = useLocation();
