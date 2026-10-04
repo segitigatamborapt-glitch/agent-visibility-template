@@ -718,3 +718,16 @@ a:hover {
 		grid-template-columns: 2fr 1fr 2fr;
 	}
 }
+
+/* Header ponsel: nama perusahaan boleh dua baris agar tombol Menu tetap sebaris */
+@media (max-width: 999px) {
+	.brand {
+		flex-shrink: 1;
+		min-width: 0;
+	}
+	.brand span {
+		font-size: 0.95rem;
+		line-height: 1.2;
+		max-width: 9.5rem;
+	}
+}

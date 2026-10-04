@@ -1,7 +1,10 @@
 export const site = {
-	// Logo header (SVG/PNG) di folder `public/`. Kosongkan untuk memakai lambang
-	// segitiga sementara + teks nama.
-	logo: "/logo.svg" as string,
+	// Logo (SVG/PNG) di folder `public/`. Kosongkan untuk memakai lambang
+	// segitiga sederhana.
+	logo: "/logo-lencana.svg" as string,
+	// true: nama perusahaan ditulis sebagai teks di samping logo (untuk logo
+	// yang tidak memuat nama dalam ukuran terbaca). false: logo sudah memuat nama.
+	logoShowName: true,
 	name: "PT. Segi Tiga Tambora",
 	shortName: "Segi Tiga Tambora",
 	tagline: "Membangun dengan mutu, ketepatan waktu, dan keselamatan kerja.",

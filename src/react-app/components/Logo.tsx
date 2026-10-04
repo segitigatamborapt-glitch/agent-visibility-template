@@ -3,13 +3,16 @@ import { site } from "../site";
 export default function Logo() {
 	if (site.logo) {
 		return (
-			<img
-				className="logo-img"
-				src={site.logo}
-				alt={site.name}
-				height={52}
-				style={{ height: 52, width: "auto" }}
-			/>
+			<>
+				<img
+					className="logo-img"
+					src={site.logo}
+					alt={site.logoShowName ? "" : site.name}
+					height={56}
+					style={{ height: 56, width: "auto" }}
+				/>
+				{site.logoShowName && <span>{site.name}</span>}
+			</>
 		);
 	}
 	return (

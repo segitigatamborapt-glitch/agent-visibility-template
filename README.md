@@ -24,13 +24,13 @@ Semua data ada di `src/react-app/site.ts`. Bagian bertanda `CONTOH` masih berupa
 
 | Yang diisi | Di mana |
 | --- | --- |
-| Logo | File di `public/` (`logo.svg` untuk header, `logo-lengkap.svg`, `logo-lambang.svg`, `favicon.svg`); atur `site.logo` |
+| Logo | File di `public/`; atur `site.logo` (aktif: `logo-lencana.svg`) dan `site.logoShowName`. Alternatif tersedia: `logo.svg` (nama di dalam gambar, set `logoShowName: false`), `logo-lengkap.svg`, `logo-lambang.svg`; `favicon.svg` untuk ikon tab |
 | Kontak (alamat, email, telepon) | `contact` |
 | Bidang usaha | `businessLines` |
 | Proyek | `projects` |
 | Angka keunggulan | `stats` (isi `value`; bagian ini tampil otomatis saat ada nilainya) |
 | Menu dan submenu | `navItems` |
 
-Logo alternatif bergaya lencana: `public/logo-lencana.svg` (untuk stempel, papan nama, media sosial; teks di dalamnya terlalu kecil untuk header).
+Logo utama adalah lencana `public/logo-lencana.svg` (cocok untuk stempel, papan nama, dan media sosial). Di header, nama perusahaan ditulis sebagai teks di samping lencana karena tulisan di dalamnya terlalu kecil.
 
 Halaman Profil Perusahaan ada di `src/react-app/pages/About.tsx`; halaman submenu lain memakai `InfoPage.tsx` sebagai placeholder sampai isinya dibuat.
