@@ -1,32 +1,15 @@
 import { Link } from "react-router";
-import HeroArt from "../components/HeroArt";
+import HeroSlider from "../components/HeroSlider";
 import Icon from "../components/Icon";
 import { categories, featured, formatRupiah, yearOf } from "../data/experience";
-import { businessLines, site, stats, values } from "../site";
+import { businessLines, stats, values } from "../site";
 
 export default function Home() {
 	const shownStats = stats.filter((s) => s.value);
 
 	return (
 		<>
-			<section className="hero">
-				<div className="container hero-inner">
-					<div className="hero-text">
-						<p className="eyebrow">Perusahaan Konstruksi</p>
-						<h1>{site.name}</h1>
-						<p className="lead">{site.tagline}</p>
-						<div className="hero-actions">
-							<Link className="button" to="/lini-bisnis">
-								Lini Bisnis
-							</Link>
-							<Link className="button button-ghost" to="/kontak">
-								Hubungi Kami
-							</Link>
-						</div>
-					</div>
-					<HeroArt />
-				</div>
-			</section>
+			<HeroSlider />
 
 			{shownStats.length > 0 && (
 				<section className="container">

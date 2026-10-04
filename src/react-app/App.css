@@ -884,3 +884,144 @@ a:hover {
 	font-weight: 700;
 	color: var(--navy);
 }
+
+/* ---------- Slider beranda ---------- */
+.hero.slider {
+	padding: 56px 0 76px;
+}
+
+.slides {
+	display: grid;
+}
+
+.slide {
+	grid-area: 1 / 1;
+	opacity: 0;
+	visibility: hidden;
+	transition:
+		opacity 0.6s ease,
+		visibility 0.6s;
+}
+
+.slide.is-active {
+	opacity: 1;
+	visibility: visible;
+}
+
+.slide h2 {
+	color: #fff;
+	font-size: clamp(1.7rem, 4vw, 2.6rem);
+}
+
+.slide-aside {
+	display: none;
+}
+
+@media (min-width: 900px) {
+	.hero.slider {
+		padding: 80px 0 84px;
+	}
+	.slide-aside {
+		display: block;
+	}
+	.slide-aside .hero-art {
+		margin-left: auto;
+	}
+}
+
+.aside-panel {
+	background: rgba(255, 255, 255, 0.08);
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	border-radius: var(--radius);
+	padding: 24px;
+	margin: 0;
+}
+
+.aside-value {
+	margin: 4px 0;
+	font-size: clamp(1.5rem, 3vw, 2.1rem);
+	font-weight: 800;
+	line-height: 1.15;
+	color: #fff;
+}
+
+.aside-label {
+	margin: 0;
+	color: #b9c7d8;
+	font-size: 0.9rem;
+}
+
+.aside-stats {
+	display: grid;
+	gap: 18px;
+}
+
+.aside-stats .aside-value {
+	color: var(--orange);
+}
+
+.aside-list {
+	list-style: none;
+	display: grid;
+	gap: 14px;
+}
+
+.aside-item {
+	margin: 0 0 2px;
+	color: #fff;
+	font-weight: 600;
+	line-height: 1.35;
+}
+
+.slider-controls {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-top: 28px;
+}
+
+.dots {
+	display: flex;
+	gap: 8px;
+}
+
+.dot {
+	width: 12px;
+	height: 12px;
+	padding: 0;
+	border-radius: 50%;
+	border: 2px solid rgba(255, 255, 255, 0.7);
+	background: transparent;
+	cursor: pointer;
+}
+
+.dot[aria-current="true"] {
+	background: var(--orange);
+	border-color: var(--orange);
+}
+
+.ctrl-btn {
+	display: inline-grid;
+	place-items: center;
+	min-width: 36px;
+	height: 36px;
+	padding: 0 10px;
+	border-radius: 999px;
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	background: transparent;
+	color: #fff;
+	font: inherit;
+	font-size: 1.2rem;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.ctrl-btn:hover {
+	background: rgba(255, 255, 255, 0.15);
+}
+
+.ctrl-text {
+	margin-left: auto;
+	font-size: 0.85rem;
+	font-weight: 600;
+}
