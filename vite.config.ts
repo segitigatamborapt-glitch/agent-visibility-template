@@ -4,7 +4,7 @@ import { cloudflare } from "@cloudflare/vite-plugin";
 
 export default defineConfig({
 	optimizeDeps: {
-		exclude: ["hono", "hono/cors"],
+		exclude: ["hono"],
 	},
 	plugins: [react(), cloudflare({ remoteBindings: false })],
 });
