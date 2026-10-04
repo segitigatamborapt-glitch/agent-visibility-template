@@ -34,7 +34,7 @@ export default function Projects() {
 			<PageHeader title="Pengalaman Proyek" parent="Pusat Informasi" />
 			<section className="container section">
 				<p className="source-note">
-					Daftar pekerjaan yang tercatat pada profil penyedia kami di SIKaP
+					Sebagian pekerjaan yang tercatat pada profil penyedia kami di SIKaP
 					(INAPROC).
 				</p>
 				<div className="chips" role="group" aria-label="Filter kategori">

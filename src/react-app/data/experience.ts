@@ -4,6 +4,7 @@ import type { IconName } from "../components/Icon";
  * Pengalaman pekerjaan PT. Segi Tiga Tambora.
  * Sumber: profil penyedia di SIKaP (INAPROC), tab "Pengalaman".
  * Untuk memperbarui, tambahkan/ubah baris di `experience` (urut dari terbaru).
+ * Sebagian catatan SIKaP sengaja tidak ditampilkan atas permintaan pemilik situs.
  */
 
 export type CategoryKey =
@@ -72,16 +73,6 @@ export const experience: Experience[] = [
 		category: "jalan-jembatan",
 	},
 	{
-		title: "Pembangunan Kampung Nelayan Merah Putih di Desa Tiku Selatan, Desa Pilubang, Desa Ampalu, Desa Marunggi, dan Desa Kota Tinggi Kuranji",
-		location: "Provinsi Sumatera Barat",
-		client: "Kementerian Kelautan dan Perikanan",
-		province: "Sumatera Barat",
-		start: "2026-08-19",
-		end: "2026-12-16",
-		value: 21082643480,
-		category: "lainnya",
-	},
-	{
 		title: "Pembangunan Gedung Sekolah Percontohan SDN Labota Kec. Bahodopi",
 		location: "Kabupaten Morowali",
 		client: "Pemerintah Daerah Kabupaten Morowali",
@@ -112,16 +103,6 @@ export const experience: Experience[] = [
 		category: "jalan-jembatan",
 	},
 	{
-		title: "Pembangunan Gedung Layanan Akademik Terpadu IAIN Madura SBSN 2024",
-		location: "Kampus IAIN Madura",
-		client: "Kementerian Agama – Satuan Kerja IAIN Madura",
-		province: "Jawa Timur",
-		start: "2024-04-26",
-		end: "2024-10-24",
-		value: 9496387000,
-		category: "gedung",
-	},
-	{
 		title: "Pembangunan Ruas Jalan Sumur – Taman Jaya",
 		location: "Kabupaten Pandeglang",
 		client: "PT. RIS Putra Delta",
@@ -130,16 +111,6 @@ export const experience: Experience[] = [
 		end: "2024-11-17",
 		value: 16871700000,
 		category: "jalan-jembatan",
-	},
-	{
-		title: "Pembangunan Masjid Pondok Pesantren Tahfidz Baitul Qur'an Al-Askar Kendari",
-		location: "Kota Kendari",
-		client: "Yayasan Pondok Pesantren Tahfidz Baitul Qur'an Al-Askar Kendari",
-		province: "Sulawesi Tenggara",
-		start: "2022-04-15",
-		end: "2022-10-12",
-		value: 17144960000,
-		category: "gedung",
 	},
 	{
 		title: "Rehabilitasi Jaringan Irigasi D.I Amohalo (DAK)",
@@ -202,16 +173,6 @@ export const experience: Experience[] = [
 		category: "jalan-jembatan",
 	},
 	{
-		title: "Peningkatan Jalan Asphalt Hot Mix AC-BC Poros Amesiu – Meluhu Kec. Amonggedo",
-		location: "Poros Amesiu – Meluhu, Kec. Amonggedo",
-		client: "Pemerintah Daerah Kabupaten Konawe",
-		province: "Sulawesi Tenggara",
-		start: "2019-08-30",
-		end: "2019-12-28",
-		value: 9082880000,
-		category: "jalan-jembatan",
-	},
-	{
 		title: "Rehabilitasi dan Renovasi Sarana dan Prasarana Sekolah Kab. Konawe, Kab. Kolaka Utara, Kab. Konawe Utara",
 		location: "Kabupaten Konawe",
 		client: "PT. Roda Indah Perkasa",
@@ -240,16 +201,6 @@ export const experience: Experience[] = [
 		end: "2018-06-14",
 		value: 2589000000,
 		category: "jalan-jembatan",
-	},
-	{
-		title: "Pembangunan Dermaga Penyeberangan Bombana Tahap III Lintas Bombana – Tj. Phising",
-		location: "Kabupaten Bombana",
-		client: "Kementerian Perhubungan",
-		province: "Sulawesi Tenggara",
-		start: "2017-03-31",
-		end: "2017-11-25",
-		value: 6477000000,
-		category: "dermaga",
 	},
 	{
 		title: "Pembuatan Drainase Pasangan Batu",

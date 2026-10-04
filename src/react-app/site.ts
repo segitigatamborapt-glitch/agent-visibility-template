@@ -113,7 +113,7 @@ export const values = [
 
 // Angka diturunkan otomatis dari data pengalaman (`data/experience.ts`).
 export const stats = [
-	{ value: String(summary.works), label: "Pekerjaan Tercatat" },
+	{ value: String(summary.works), label: "Referensi Pekerjaan" },
 	{ value: String(summary.clients), label: "Pemberi Tugas" },
 	{ value: String(summary.provinces), label: "Provinsi" },
 	{ value: String(summary.since), label: "Rekam Jejak Sejak" },
