@@ -1025,3 +1025,38 @@ a:hover {
 	font-size: 0.85rem;
 	font-weight: 600;
 }
+
+/* ---------- Halaman teks (Informasi Keuangan) ---------- */
+.lead-dark {
+	font-size: 1.15rem;
+	color: var(--navy);
+	margin-top: 0;
+}
+
+.check-list {
+	margin: 0 0 8px;
+	padding-left: 1.2rem;
+}
+
+.check-list li {
+	margin-bottom: 6px;
+}
+
+.actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin: 24px 0 12px;
+}
+
+.button-outline {
+	background: transparent;
+	color: var(--navy);
+	border-color: var(--navy);
+}
+
+.button-outline:hover {
+	background: var(--navy);
+	border-color: var(--navy);
+	color: #fff;
+}

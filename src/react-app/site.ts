@@ -47,13 +47,7 @@ export const navItems: NavItem[] = [
 			{ label: "Kebijakan Perusahaan", to: "/tentang/kebijakan-perusahaan" },
 		],
 	},
-	{
-		label: "Informasi Keuangan",
-		children: [
-			{ label: "Laporan Tahunan", to: "/keuangan/laporan-tahunan" },
-			{ label: "Laporan Keuangan", to: "/keuangan/laporan-keuangan" },
-		],
-	},
+	{ label: "Informasi Keuangan", to: "/informasi-keuangan" },
 	{
 		label: "Lini Bisnis",
 		children: [
