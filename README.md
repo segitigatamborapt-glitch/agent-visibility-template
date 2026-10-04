@@ -24,7 +24,7 @@ Semua data ada di `src/react-app/site.ts`. Bagian bertanda `CONTOH` masih berupa
 
 | Yang diisi | Di mana |
 | --- | --- |
-| Logo | Taruh file di `public/`, lalu isi `site.logo` (mis. `"/logo.png"`) |
+| Logo | File di `public/` (`logo.svg` untuk header, `logo-lengkap.svg`, `logo-lambang.svg`, `favicon.svg`); atur `site.logo` |
 | Kontak (alamat, email, telepon) | `contact` |
 | Bidang usaha | `businessLines` |
 | Proyek | `projects` |

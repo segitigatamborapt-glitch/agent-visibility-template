@@ -1,7 +1,7 @@
 export const site = {
-	// Letakkan file logo di folder `public/` (mis. `public/logo.png`), lalu isi
-	// dengan "/logo.png". Selama kosong, dipakai lambang segitiga sementara.
-	logo: "" as string,
+	// Logo header (SVG/PNG) di folder `public/`. Kosongkan untuk memakai lambang
+	// segitiga sementara + teks nama.
+	logo: "/logo.svg" as string,
 	name: "PT. Segi Tiga Tambora",
 	shortName: "Segi Tiga Tambora",
 	tagline: "Membangun dengan mutu, ketepatan waktu, dan keselamatan kerja.",

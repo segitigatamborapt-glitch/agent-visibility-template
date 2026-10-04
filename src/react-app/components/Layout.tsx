@@ -47,7 +47,6 @@ export default function Layout() {
 				<div className="container header-inner">
 					<Link to="/" className="brand">
 						<Logo />
-						<span>{site.name}</span>
 					</Link>
 					<button
 						type="button"
