@@ -78,7 +78,7 @@ export default function Home() {
 							</div>
 							<h3>{p.title}</h3>
 							<p>
-								{p.location} · {yearOf(p.start)}
+								{p.client} · {yearOf(p.date)}
 							</p>
 							<p className="project-value">{formatRupiah(p.value)}</p>
 						</article>

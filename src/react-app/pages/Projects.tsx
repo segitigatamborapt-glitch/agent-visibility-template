@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PageHeader from "../components/PageHeader";
-import WorkCard from "../components/WorkCard";
+import ExperienceTable from "../components/ExperienceTable";
 import { categories, experience, type CategoryKey } from "../data/experience";
 
 type Filter = CategoryKey | "semua";
@@ -34,8 +34,7 @@ export default function Projects() {
 			<PageHeader title="Pengalaman Proyek" parent="Pusat Informasi" />
 			<section className="container section">
 				<p className="source-note">
-					Sebagian pekerjaan yang tercatat pada profil penyedia kami di SIKaP
-					(INAPROC).
+					Sebagian pekerjaan hasil tender yang tercatat di LPSE (INAPROC).
 				</p>
 				<div className="chips" role="group" aria-label="Filter kategori">
 					{options.map((o) => (
@@ -50,11 +49,7 @@ export default function Projects() {
 						</button>
 					))}
 				</div>
-				<div className="cards cards-2">
-					{shown.map((e) => (
-						<WorkCard key={`${e.title}-${e.start}`} item={e} />
-					))}
-				</div>
+				<ExperienceTable items={shown} />
 			</section>
 		</>
 	);

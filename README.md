@@ -35,6 +35,6 @@ Halaman Profil Perusahaan ada di `src/react-app/pages/About.tsx`; halaman submen
 
 ## Data pengalaman proyek
 
-Daftar pekerjaan ada di `src/react-app/data/experience.ts`, disalin dari tab **Pengalaman** pada profil penyedia di SIKaP (INAPROC). Untuk memperbarui, tambah atau ubah baris di `experience` (urut dari terbaru). Beranda, halaman *Pengalaman Proyek*, rincian *Lini Bisnis*, dan angka ringkasan ikut berubah otomatis; label "Sedang berjalan" dihitung dari tanggal kontrak.
+Daftar pekerjaan ada di `src/react-app/data/experience.ts`, berisi pekerjaan hasil tender yang tercatat di LPSE (INAPROC): tanggal tender, nama pekerjaan, pemberi kerja, nilai kontrak, dan nomor paket LPSE. Untuk memperbarui, tambah atau ubah baris di `experience`. Beranda, halaman *Pengalaman Proyek*, rincian *Lini Bisnis* (kategori tanpa pekerjaan otomatis disembunyikan), dan angka ringkasan ikut berubah; label "Sedang berjalan" mengikuti isian `ongoing`.
 
-Belum ada sinkronisasi otomatis dengan SIKaP/INAPROC: data profil penyedia berada di balik login dan tidak ada API resmi yang kami temukan, jadi pembaruan dilakukan manual.
+Belum ada sinkronisasi otomatis dengan LPSE/INAPROC; pembaruan dilakukan manual.

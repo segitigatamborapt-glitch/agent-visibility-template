@@ -828,22 +828,6 @@ a:hover {
 	color: #ffd9a8;
 }
 
-.work {
-	display: flex;
-	flex-direction: column;
-}
-
-.work h3 {
-	margin: 10px 0 14px;
-}
-
-.work-top {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	gap: 8px;
-}
-
 .chip-static {
 	padding: 3px 10px;
 	border-radius: 999px;
@@ -860,23 +844,6 @@ a:hover {
 	color: #1d6b3a;
 	font-size: 0.75rem;
 	font-weight: 700;
-}
-
-.meta {
-	display: grid;
-	grid-template-columns: max-content 1fr;
-	gap: 6px 14px;
-	margin: 0;
-	font-size: 0.92rem;
-}
-
-.meta dt {
-	color: var(--muted);
-}
-
-.meta dd {
-	margin: 0;
-	overflow-wrap: anywhere;
 }
 
 .project-value {
@@ -1059,4 +1026,117 @@ a:hover {
 	background: var(--navy);
 	border-color: var(--navy);
 	color: #fff;
+}
+
+/* ---------- Tabel pengalaman ---------- */
+.table-wrap {
+	overflow-x: auto;
+}
+
+.exp-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.95rem;
+}
+
+.exp-table th {
+	text-align: left;
+	padding: 12px 14px;
+	font-size: 0.74rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--muted);
+	border-bottom: 2px solid var(--navy);
+}
+
+.exp-table td {
+	padding: 16px 14px;
+	vertical-align: top;
+	border-bottom: 1px solid var(--line);
+}
+
+.exp-table tbody tr:hover {
+	background: var(--soft);
+}
+
+.exp-table .num {
+	text-align: right;
+	white-space: nowrap;
+	font-weight: 700;
+	color: var(--navy);
+}
+
+.exp-date {
+	white-space: nowrap;
+	color: var(--muted);
+}
+
+.exp-title {
+	display: block;
+	font-weight: 600;
+	line-height: 1.4;
+}
+
+.exp-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-top: 8px;
+}
+
+.exp-meta {
+	display: block;
+	margin-top: 6px;
+	font-size: 0.8rem;
+	color: var(--muted);
+}
+
+.exp-table td:nth-child(3) {
+	min-width: 190px;
+}
+
+.client-pill {
+	display: inline-block;
+	padding: 3px 10px;
+	border-radius: 12px;
+	background: #eef3f8;
+	color: var(--navy);
+	font-size: 0.82rem;
+	font-weight: 600;
+}
+
+@media (max-width: 719px) {
+	.exp-table thead {
+		position: absolute;
+		left: -9999px;
+	}
+	.exp-table,
+	.exp-table tbody,
+	.exp-table tr,
+	.exp-table td {
+		display: block;
+		width: 100%;
+	}
+	.exp-table tr {
+		margin-bottom: 14px;
+		padding: 14px;
+		border: 1px solid var(--line);
+		border-top: 3px solid var(--orange);
+		border-radius: var(--radius);
+	}
+	.exp-table td {
+		padding: 6px 0;
+		border: 0;
+	}
+	.exp-table td::before {
+		content: attr(data-label);
+		display: block;
+		font-size: 0.7rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--muted);
+	}
+	.exp-table .num {
+		text-align: left;
+	}
 }

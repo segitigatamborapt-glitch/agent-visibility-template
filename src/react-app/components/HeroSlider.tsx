@@ -46,7 +46,7 @@ function buildSlides(): Slide[] {
 					<p className="aside-label">Kontrak terbesar</p>
 					<p className="aside-value">{formatRupiah(biggest.value)}</p>
 					<p className="aside-label">
-						{biggest.title}, {biggest.location}
+						{biggest.title}, {biggest.client}
 					</p>
 				</div>
 			),
@@ -82,9 +82,9 @@ function buildSlides(): Slide[] {
 			aside: (
 				<ul className="aside-panel aside-list">
 					{ongoing.slice(0, 4).map((e) => (
-						<li key={e.title + e.start}>
+						<li key={e.title + e.date}>
 							<p className="aside-item">{e.title}</p>
-							<p className="aside-label">{e.location}</p>
+							<p className="aside-label">{e.client}</p>
 						</li>
 					))}
 				</ul>

@@ -27,7 +27,7 @@ export const businessLines = (
 	desc: categories[key].desc,
 	icon: categories[key].icon,
 	count: experience.filter((e) => e.category === key).length,
-}));
+})).filter((b) => b.count > 0);
 
 export type NavChild = { label: string; to: string };
 export type NavItem = { label: string; to?: string; children?: NavChild[] };
@@ -102,7 +102,7 @@ export const values = [
 // Angka diturunkan otomatis dari data pengalaman (`data/experience.ts`).
 export const stats = [
 	{ value: String(summary.works), label: "Referensi Pekerjaan" },
-	{ value: String(summary.clients), label: "Pemberi Tugas" },
+	{ value: String(summary.clients), label: "Pemberi Kerja" },
 	{ value: String(summary.provinces), label: "Provinsi" },
 	{ value: String(summary.since), label: "Rekam Jejak Sejak" },
 ];
