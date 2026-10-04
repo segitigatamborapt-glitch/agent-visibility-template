@@ -1,3 +1,4 @@
+import { culture } from "./data/about";
 import {
 	categories,
 	experience,
@@ -43,7 +44,6 @@ export const navItems: NavItem[] = [
 			{ label: "Budaya Perusahaan", to: "/tentang/budaya-perusahaan" },
 			{ label: "Struktur Organisasi", to: "/tentang/struktur-organisasi" },
 			{ label: "Manajemen", to: "/tentang/manajemen" },
-			{ label: "Anak Perusahaan", to: "/tentang/anak-perusahaan" },
 			{ label: "Kebijakan Perusahaan", to: "/tentang/kebijakan-perusahaan" },
 		],
 	},
@@ -83,21 +83,8 @@ export const navLeaves: NavChild[] = navItems.flatMap((item) =>
 	item.children ? item.children : item.to ? [{ label: item.label, to: item.to }] : [],
 );
 
-// Nilai perusahaan — diturunkan dari tagline; sesuaikan.
-export const values = [
-	{
-		title: "Mutu",
-		desc: "Standar kualitas yang konsisten di setiap tahap pekerjaan.",
-	},
-	{
-		title: "Ketepatan Waktu",
-		desc: "Perencanaan dan pengendalian jadwal yang disiplin.",
-	},
-	{
-		title: "Keselamatan Kerja",
-		desc: "Keselamatan dan kesehatan kerja sebagai prioritas utama.",
-	},
-];
+// Komitmen di beranda mengikuti tiga nilai pertama budaya perusahaan.
+export const values = culture.slice(0, 3);
 
 // Angka diturunkan otomatis dari data pengalaman (`data/experience.ts`).
 export const stats = [
