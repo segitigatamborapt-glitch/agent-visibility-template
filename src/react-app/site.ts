@@ -1,3 +1,10 @@
+import {
+	categories,
+	experience,
+	summary,
+	type CategoryKey,
+} from "./data/experience";
+
 export const site = {
 	// Logo (SVG/PNG) di folder `public/`. Kosongkan untuk memakai lambang
 	// segitiga sederhana.
@@ -10,6 +17,17 @@ export const site = {
 	tagline: "Membangun dengan mutu, ketepatan waktu, dan keselamatan kerja.",
 	description: "PT. Segi Tiga Tambora, perusahaan konstruksi.",
 };
+
+// Lini bisnis diturunkan dari kategori pekerjaan pada data pengalaman.
+export const businessLines = (
+	["jalan-jembatan", "gedung", "dermaga", "air-pantai"] as CategoryKey[]
+).map((key) => ({
+	slug: key,
+	title: categories[key].title,
+	desc: categories[key].desc,
+	icon: categories[key].icon,
+	count: experience.filter((e) => e.category === key).length,
+}));
 
 export type NavChild = { label: string; to: string };
 export type NavItem = { label: string; to?: string; children?: NavChild[] };
@@ -40,9 +58,10 @@ export const navItems: NavItem[] = [
 		label: "Lini Bisnis",
 		children: [
 			{ label: "Semua Lini Bisnis", to: "/lini-bisnis" },
-			{ label: "Konstruksi Gedung", to: "/lini-bisnis/konstruksi-gedung" },
-			{ label: "Infrastruktur", to: "/lini-bisnis/infrastruktur" },
-			{ label: "Sipil & Struktur", to: "/lini-bisnis/sipil-struktur" },
+			...businessLines.map((b) => ({
+				label: b.title,
+				to: `/lini-bisnis/${b.slug}`,
+			})),
 		],
 	},
 	{
@@ -63,7 +82,7 @@ export const navItems: NavItem[] = [
 		label: "Pusat Informasi",
 		children: [
 			{ label: "Berita", to: "/informasi/berita" },
-			{ label: "Proyek", to: "/proyek" },
+			{ label: "Pengalaman Proyek", to: "/proyek" },
 			{ label: "Galeri", to: "/informasi/galeri" },
 			{ label: "Unduhan", to: "/informasi/unduhan" },
 		],
@@ -75,52 +94,6 @@ export const navItems: NavItem[] = [
 export const navLeaves: NavChild[] = navItems.flatMap((item) =>
 	item.children ? item.children : item.to ? [{ label: item.label, to: item.to }] : [],
 );
-
-export type IconName =
-	| "building"
-	| "road"
-	| "structure"
-	| "bolt"
-	| "wrench"
-	| "truck";
-
-// CONTOH — sesuaikan dengan bidang usaha sebenarnya.
-export const businessLines: {
-	title: string;
-	desc: string;
-	icon: IconName;
-}[] = [
-	{
-		title: "Konstruksi Gedung",
-		desc: "Perkantoran, hunian, dan fasilitas umum.",
-		icon: "building",
-	},
-	{
-		title: "Infrastruktur",
-		desc: "Jalan, jembatan, dan drainase.",
-		icon: "road",
-	},
-	{
-		title: "Sipil & Struktur",
-		desc: "Pondasi, struktur beton, dan baja.",
-		icon: "structure",
-	},
-	{
-		title: "Mekanikal & Elektrikal",
-		desc: "Instalasi MEP untuk bangunan dan industri.",
-		icon: "bolt",
-	},
-	{
-		title: "Renovasi & Perawatan",
-		desc: "Perbaikan dan peningkatan bangunan existing.",
-		icon: "wrench",
-	},
-	{
-		title: "Penyewaan Alat Berat",
-		desc: "Dukungan peralatan untuk proyek konstruksi.",
-		icon: "truck",
-	},
-];
 
 // Nilai perusahaan — diturunkan dari tagline; sesuaikan.
 export const values = [
@@ -138,25 +111,18 @@ export const values = [
 	},
 ];
 
-// Isi `value` dengan angka nyata (mis. "15+"); bagian ini disembunyikan
-// otomatis selama semua nilainya masih kosong.
+// Angka diturunkan otomatis dari data pengalaman (`data/experience.ts`).
 export const stats = [
-	{ value: "", label: "Tahun Pengalaman" },
-	{ value: "", label: "Proyek Selesai" },
-	{ value: "", label: "Tenaga Ahli" },
-	{ value: "", label: "Klien" },
+	{ value: String(summary.works), label: "Pekerjaan Tercatat" },
+	{ value: String(summary.clients), label: "Pemberi Tugas" },
+	{ value: String(summary.provinces), label: "Provinsi" },
+	{ value: String(summary.since), label: "Rekam Jejak Sejak" },
 ];
 
-// CONTOH — ganti dengan proyek nyata.
-export const projects = [
-	{ title: "Nama Proyek 1", category: "Kategori", meta: "Lokasi · Tahun" },
-	{ title: "Nama Proyek 2", category: "Kategori", meta: "Lokasi · Tahun" },
-	{ title: "Nama Proyek 3", category: "Kategori", meta: "Lokasi · Tahun" },
-];
-
-// CONTOH — ganti dengan data kontak nyata.
 export const contact = {
-	address: "Alamat kantor akan diisi",
-	email: "email@perusahaan.example",
-	phone: "Nomor telepon akan diisi",
+	address: "Lrg. Manggis, Andounohu, Kota Kendari",
+	email: "segitigatamborapt@gmail.com",
+	phone: "+62 821-1455-5569",
+	// Tautan untuk klik langsung (nomor tanpa spasi/tanda hubung)
+	phoneHref: "tel:+6282114555569",
 };

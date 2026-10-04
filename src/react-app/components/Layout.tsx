@@ -129,8 +129,12 @@ export default function Layout() {
 					<div>
 						<h2 className="footer-title">Kontak</h2>
 						<p>{contact.address}</p>
-						<p>{contact.email}</p>
-						<p>{contact.phone}</p>
+						<p>
+							<a href={`mailto:${contact.email}`}>{contact.email}</a>
+						</p>
+						<p>
+							<a href={contact.phoneHref}>{contact.phone}</a>
+						</p>
 					</div>
 				</div>
 				<div className="container footer-bottom">

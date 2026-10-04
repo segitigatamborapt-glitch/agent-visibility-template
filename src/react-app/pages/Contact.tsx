@@ -1,12 +1,21 @@
 import Icon from "../components/Icon";
 import PageHeader from "../components/PageHeader";
-import Sample from "../components/Sample";
 import { contact } from "../site";
 
 const rows = [
-	{ icon: "pin", label: "Alamat", value: contact.address },
-	{ icon: "mail", label: "Email", value: contact.email },
-	{ icon: "phone", label: "Telepon", value: contact.phone },
+	{ icon: "pin", label: "Alamat", value: contact.address, href: "" },
+	{
+		icon: "mail",
+		label: "Email",
+		value: contact.email,
+		href: `mailto:${contact.email}`,
+	},
+	{
+		icon: "phone",
+		label: "Telepon",
+		value: contact.phone,
+		href: contact.phoneHref,
+	},
 ] as const;
 
 export default function Contact() {
@@ -14,7 +23,6 @@ export default function Contact() {
 		<>
 			<PageHeader title="Kontak" />
 			<section className="container section">
-				<Sample />
 				<div className="cards">
 					{rows.map((r) => (
 						<article key={r.label} className="card">
@@ -22,11 +30,13 @@ export default function Contact() {
 								<Icon name={r.icon} />
 							</span>
 							<h3>{r.label}</h3>
-							<p>{r.value}</p>
+							<p>{r.href ? <a href={r.href}>{r.value}</a> : r.value}</p>
 						</article>
 					))}
 				</div>
-				<p>Formulir kontak akan ditambahkan pada langkah berikutnya.</p>
+				<p>
+					Silakan hubungi kami melalui alamat, email, atau telepon di atas.
+				</p>
 			</section>
 		</>
 	);

@@ -500,6 +500,7 @@ a:hover {
 .card p {
 	margin: 0;
 	color: var(--muted);
+	overflow-wrap: anywhere;
 }
 
 .icon-badge {
@@ -730,4 +731,156 @@ a:hover {
 		line-height: 1.2;
 		max-width: 9.5rem;
 	}
+}
+
+/* ---------- Pengalaman proyek ---------- */
+.cards-2 {
+	grid-template-columns: 1fr;
+}
+
+.cards-4 {
+	grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+	.cards-2 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.cards-4 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 1000px) {
+	.cards-4 {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+.card-link {
+	display: block;
+	color: inherit;
+}
+
+.card-link:hover {
+	text-decoration: none;
+}
+
+.line-count {
+	display: inline-block;
+	margin-top: 12px;
+	font-size: 0.85rem;
+	font-weight: 700;
+	color: var(--orange-text);
+}
+
+.source-note {
+	color: var(--muted);
+	margin: 0 0 20px;
+}
+
+.sub-title {
+	margin: 8px 0 16px;
+}
+
+.chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 24px;
+}
+
+.chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 16px;
+	border: 1px solid var(--line);
+	border-radius: 999px;
+	background: #fff;
+	color: var(--navy);
+	font: inherit;
+	font-size: 0.9rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition:
+		background 0.15s,
+		color 0.15s,
+		border-color 0.15s;
+}
+
+.chip span {
+	font-size: 0.78rem;
+	color: var(--muted);
+}
+
+.chip:hover {
+	border-color: var(--navy);
+}
+
+.chip[aria-pressed="true"] {
+	background: var(--navy);
+	border-color: var(--navy);
+	color: #fff;
+}
+
+.chip[aria-pressed="true"] span {
+	color: #ffd9a8;
+}
+
+.work {
+	display: flex;
+	flex-direction: column;
+}
+
+.work h3 {
+	margin: 10px 0 14px;
+}
+
+.work-top {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+
+.chip-static {
+	padding: 3px 10px;
+	border-radius: 999px;
+	background: #fff1e0;
+	color: var(--orange-text);
+	font-size: 0.75rem;
+	font-weight: 700;
+}
+
+.tag-ongoing {
+	padding: 3px 10px;
+	border-radius: 999px;
+	background: #e3f4e8;
+	color: #1d6b3a;
+	font-size: 0.75rem;
+	font-weight: 700;
+}
+
+.meta {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	gap: 6px 14px;
+	margin: 0;
+	font-size: 0.92rem;
+}
+
+.meta dt {
+	color: var(--muted);
+}
+
+.meta dd {
+	margin: 0;
+	overflow-wrap: anywhere;
+}
+
+.project-value {
+	margin-top: 4px;
+	font-weight: 700;
+	color: var(--navy);
 }

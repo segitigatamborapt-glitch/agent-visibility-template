@@ -26,11 +26,15 @@ Semua data ada di `src/react-app/site.ts`. Bagian bertanda `CONTOH` masih berupa
 | --- | --- |
 | Logo | File di `public/`; atur `site.logo` (aktif: `logo-lencana.svg`) dan `site.logoShowName`. Alternatif tersedia: `logo.svg` (nama di dalam gambar, set `logoShowName: false`), `logo-lengkap.svg`, `logo-lambang.svg`; `favicon.svg` untuk ikon tab |
 | Kontak (alamat, email, telepon) | `contact` |
-| Bidang usaha | `businessLines` |
-| Proyek | `projects` |
-| Angka keunggulan | `stats` (isi `value`; bagian ini tampil otomatis saat ada nilainya) |
+| Pengalaman proyek | `src/react-app/data/experience.ts` (satu berkas; bidang usaha, proyek unggulan, dan angka di beranda diturunkan otomatis dari sini) |
 | Menu dan submenu | `navItems` |
 
 Logo utama adalah lencana `public/logo-lencana.svg` (cocok untuk stempel, papan nama, dan media sosial). Di header, nama perusahaan ditulis sebagai teks di samping lencana karena tulisan di dalamnya terlalu kecil.
 
 Halaman Profil Perusahaan ada di `src/react-app/pages/About.tsx`; halaman submenu lain memakai `InfoPage.tsx` sebagai placeholder sampai isinya dibuat.
+
+## Data pengalaman proyek
+
+Daftar pekerjaan ada di `src/react-app/data/experience.ts`, disalin dari tab **Pengalaman** pada profil penyedia di SIKaP (INAPROC). Untuk memperbarui, tambah atau ubah baris di `experience` (urut dari terbaru). Beranda, halaman *Pengalaman Proyek*, rincian *Lini Bisnis*, dan angka ringkasan ikut berubah otomatis; label "Sedang berjalan" dihitung dari tanggal kontrak.
+
+Belum ada sinkronisasi otomatis dengan SIKaP/INAPROC: data profil penyedia berada di balik login dan tidak ada API resmi yang kami temukan, jadi pembaruan dilakukan manual.

@@ -1,6 +1,6 @@
+import { Link } from "react-router";
 import Icon from "../components/Icon";
 import PageHeader from "../components/PageHeader";
-import Sample from "../components/Sample";
 import { businessLines } from "../site";
 
 export default function Services() {
@@ -8,16 +8,20 @@ export default function Services() {
 		<>
 			<PageHeader title="Lini Bisnis" />
 			<section className="container section">
-				<Sample />
-				<div className="cards">
+				<div className="cards cards-4">
 					{businessLines.map((b) => (
-						<article key={b.title} className="card">
+						<Link
+							key={b.slug}
+							to={`/lini-bisnis/${b.slug}`}
+							className="card card-link"
+						>
 							<span className="icon-badge">
 								<Icon name={b.icon} />
 							</span>
 							<h3>{b.title}</h3>
 							<p>{b.desc}</p>
-						</article>
+							<span className="line-count">{b.count} pekerjaan</span>
+						</Link>
 					))}
 				</div>
 			</section>

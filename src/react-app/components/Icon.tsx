@@ -1,6 +1,21 @@
-import type { IconName } from "../site";
+export type IconName =
+	| "building"
+	| "road"
+	| "structure"
+	| "bolt"
+	| "wrench"
+	| "truck"
+	| "anchor"
+	| "waves"
+	| "mail"
+	| "phone"
+	| "pin";
 
-const paths: Record<IconName | "mail" | "phone" | "pin", string> = {
+const paths: Record<IconName, string> = {
+	anchor:
+		"M12 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM12 7v14M8.5 11h7M4 14a8 8 0 0 0 16 0M4 14l-1.5 1M20 14l1.5 1",
+	waves:
+		"M3 8c3 0 3 2 6 2s3-2 6-2 3 2 6 2M3 13c3 0 3 2 6 2s3-2 6-2 3 2 6 2M3 18c3 0 3 2 6 2s3-2 6-2 3 2 6 2",
 	building:
 		"M4 21V5l8-2 8 2v16M9 21v-4h6v4M8 9h2M14 9h2M8 13h2M14 13h2",
 	road: "M8 3 4 21M16 3l4 18M12 4v3M12 10v4M12 17v3",
@@ -20,7 +35,7 @@ export default function Icon({
 	name,
 	size = 24,
 }: {
-	name: keyof typeof paths;
+	name: IconName;
 	size?: number;
 }) {
 	return (

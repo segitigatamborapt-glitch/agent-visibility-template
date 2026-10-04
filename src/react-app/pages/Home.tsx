@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 import HeroArt from "../components/HeroArt";
 import Icon from "../components/Icon";
-import Sample from "../components/Sample";
-import { businessLines, projects, site, stats, values } from "../site";
+import { categories, featured, formatRupiah, yearOf } from "../data/experience";
+import { businessLines, site, stats, values } from "../site";
 
 export default function Home() {
 	const shownStats = stats.filter((s) => s.value);
@@ -44,18 +44,22 @@ export default function Home() {
 			<section className="section container">
 				<header className="section-head">
 					<h2>Lini Bisnis</h2>
-					<p>Layanan konstruksi untuk berbagai kebutuhan proyek.</p>
-					<Sample />
+					<p>Bidang pekerjaan yang telah kami tangani.</p>
 				</header>
-				<div className="cards">
+				<div className="cards cards-4">
 					{businessLines.map((b) => (
-						<article key={b.title} className="card">
+						<Link
+							key={b.slug}
+							to={`/lini-bisnis/${b.slug}`}
+							className="card card-link"
+						>
 							<span className="icon-badge">
 								<Icon name={b.icon} />
 							</span>
 							<h3>{b.title}</h3>
 							<p>{b.desc}</p>
-						</article>
+							<span className="line-count">{b.count} pekerjaan</span>
+						</Link>
 					))}
 				</div>
 			</section>
@@ -81,17 +85,19 @@ export default function Home() {
 			<section className="section container">
 				<header className="section-head">
 					<h2>Proyek Unggulan</h2>
-					<p>Sebagian proyek yang telah kami kerjakan.</p>
-					<Sample />
+					<p>Pekerjaan dengan nilai kontrak terbesar yang pernah kami tangani.</p>
 				</header>
 				<div className="cards cards-3">
-					{projects.map((p) => (
+					{featured.map((p) => (
 						<article key={p.title} className="card project">
 							<div className="project-img" aria-hidden="true">
-								<span className="badge">{p.category}</span>
+								<span className="badge">{categories[p.category].short}</span>
 							</div>
 							<h3>{p.title}</h3>
-							<p>{p.meta}</p>
+							<p>
+								{p.location} · {yearOf(p.start)}
+							</p>
+							<p className="project-value">{formatRupiah(p.value)}</p>
 						</article>
 					))}
 				</div>
