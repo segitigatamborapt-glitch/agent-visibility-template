@@ -739,21 +739,12 @@ a:hover {
 }
 
 .cards-4 {
-	grid-template-columns: 1fr;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 @media (min-width: 720px) {
 	.cards-2 {
 		grid-template-columns: repeat(2, 1fr);
-	}
-	.cards-4 {
-		grid-template-columns: repeat(2, 1fr);
-	}
-}
-
-@media (min-width: 1000px) {
-	.cards-4 {
-		grid-template-columns: repeat(4, 1fr);
 	}
 }
 
