@@ -22,9 +22,9 @@ Kode program (file `.ts`, `.json`, `.jsonc`) tetap berbahasa Inggris karena diba
 | `kandang-kub-2000/gambar/G-04-tampak-samping-depan.png` | Tampak samping dan tampak depan. |
 | `kandang-kub-2000/gambar/G-05-detail-pondasi.png` | Detail pondasi. |
 | `kandang-kub-2000/gambar/gambar-kandang-2000-ekor.pdf` | Kelima gambar di atas dalam satu file PDF. |
-| `masterplan-4ha/MP-01-masterplan-4ha.png` | Masterplan lahan 4 ha: 1 ha zona kandang 10.000 ekor, 3 ha kebun pakan (jagung, indigofera, pagar hidup lamtoro), embung, dan unit pengolahan pakan. |
-| `masterplan-4ha/MP-02-zona-kandang-1ha.png` | Tata letak zona kandang 1 ha: 5 kandang layer 10 x 40 m, 1 kandang starter, zona bersih dan zona kotor. |
-| `masterplan-4ha/MP-03-neraca-lahan-dan-penghematan.png` | Neraca luas lahan, alur kotoran-kompos-jagung-pakan, perkiraan penghematan pakan, dan perkiraan investasi. |
+| `masterplan-4ha/MP-01-masterplan-4ha.png` | Masterplan lahan 4 ha sistem semi umbaran: zona kandang 1,6 ha untuk 10.000 ekor, zona servis, kebun jagung, embung, pengolahan pakan, dan pagar kawat harmonika keliling. |
+| `masterplan-4ha/MP-02-zona-kandang-semi-umbaran.png` | Tata letak zona kandang: 5 kandang layer dan 1 kandang starter 10 x 40 m, masing-masing dengan petak umbaran 45 x 38 m berpagar harmonika dan pohon peneduh. |
+| `masterplan-4ha/MP-03-neraca-lahan-dan-penghematan.png` | Neraca luas lahan, alur kotoran-kompos-jagung-pakan, perkiraan penghematan pakan, dan perkiraan investasi termasuk pagar harmonika. |
 | `masterplan-4ha/Masterplan-Lahan-4-Ha-Adeva-Farm.pdf` | Ketiga gambar masterplan dalam satu file PDF. |
 
 Catatan: angka di RAB dan dashboard adalah perkiraan perencanaan. Harga bahan perlu dicek ulang ke toko bangunan, toko pakan, dan pemasok setempat sebelum dipakai untuk keputusan.
