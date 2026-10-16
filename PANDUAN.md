@@ -13,7 +13,7 @@ Kode program (file `.ts`, `.json`, `.jsonc`) tetap berbahasa Inggris karena diba
 
 | Folder / file | Isi |
 |---|---|
-| `dashboard-kub/Dashboard-Ayam-KUB-Petelur-Adeva-Farm.pdf` | Cetakan dashboard studi kelayakan ayam KUB petelur 1.000 ekor: modal awal, untung rugi, skenario, penetasan sendiri, pakan sendiri (jagung 1 ha, resep ransum A/B/C), mitigasi risiko, riset pasar, perencanaan, dan asumsi. Versi interaktif (slider bisa digeser) ada di tautan artifact Claude. |
+| `dashboard-kub/Dashboard-Ayam-KUB-Petelur-Adeva-Farm.pdf` | Cetakan dashboard studi kelayakan ayam KUB petelur 10.000 ekor: modal awal, untung rugi, skenario, penetasan sendiri, pakan sendiri (jagung 1 ha, resep ransum A/B/C, racikan telur terbaik T1/T2/T3 dan kebutuhan pakan harian), mitigasi risiko, riset pasar, perencanaan, dan asumsi. Versi interaktif (slider bisa digeser) ada di tautan artifact Claude. |
 | `kandang-kub-2000/RAB-Kandang-Ayam-KUB-2000-Ekor-Konawe-Selatan.xlsx` | RAB kandang standar 2.000 ekor di lahan 1 ha, harga acuan Kabupaten Konawe Selatan (sekitar Rp 1,02 miliar termasuk bangunan pendukung). |
 | `kandang-kub-2000/RAB-HEMAT-Kandang-Ayam-KUB-2000-Ekor-Konawe-Selatan.xlsx` | RAB versi hemat: rangka kayu di atas umpak, atap seng (sekitar Rp 355 juta untuk 2.000 ekor, sekitar Rp 232 juta untuk tahap 1 berisi 1.000 ekor). |
 | `kandang-kub-2000/gambar/G-01-rencana-tapak.png` | Rencana tapak: tata letak kandang dan bangunan di lahan 1 ha. |
