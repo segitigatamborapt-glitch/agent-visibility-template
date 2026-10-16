@@ -22,10 +22,15 @@ Kode program (file `.ts`, `.json`, `.jsonc`) tetap berbahasa Inggris karena diba
 | `kandang-kub-2000/gambar/G-04-tampak-samping-depan.png` | Tampak samping dan tampak depan. |
 | `kandang-kub-2000/gambar/G-05-detail-pondasi.png` | Detail pondasi. |
 | `kandang-kub-2000/gambar/gambar-kandang-2000-ekor.pdf` | Kelima gambar di atas dalam satu file PDF. |
-| `masterplan-4ha/MP-01-masterplan-4ha.png` | Masterplan lahan 4 ha sistem semi umbaran: zona kandang 1,6 ha untuk 10.000 ekor, zona servis, kebun jagung, embung, pengolahan pakan, dan pagar kawat harmonika keliling. |
-| `masterplan-4ha/MP-02-zona-kandang-semi-umbaran.png` | Tata letak zona kandang: 5 kandang layer dan 1 kandang starter 10 x 40 m, masing-masing dengan petak umbaran 45 x 38 m berpagar harmonika dan pohon peneduh. |
-| `masterplan-4ha/MP-03-neraca-lahan-dan-penghematan.png` | Neraca luas lahan, alur kotoran-kompos-jagung-pakan, perkiraan penghematan pakan, dan perkiraan investasi termasuk pagar harmonika. |
+| `masterplan-4ha/MP-01-masterplan-4ha.png` | Masterplan lahan 4 ha (100 x 400 m) sesuai sketsa pemilik: zona servis, zona kandang semi umbaran, zona kotor, kebun jagung, embung, sungai, pagar harmonika. |
+| `masterplan-4ha/MP-02-zona-servis-kandang-kotor.png` | Tata letak 245 m pertama dari jalan: bangunan servis, 6 kandang + umbaran, zona kotor, alur kerja. |
+| `masterplan-4ha/MP-03-neraca-lahan-dan-rab.png` | Neraca luas lahan, alur pakan-kompos, perkiraan manfaat, rekap RAB. |
 | `masterplan-4ha/Masterplan-Lahan-4-Ha-Adeva-Farm.pdf` | Ketiga gambar masterplan dalam satu file PDF. |
+| `desain-konstruksi/gambar-teknik/GT-01-Kandang-Semi-Umbaran-10x40.dxf` | Gambar teknik AutoCAD kandang 10 x 40 m (satuan cm): denah, pondasi, tampak, potongan, detail pondasi, penulangan, atap, dinding/kawat/tirai, pintu umbaran, pintu, sarang, tenggeran. PDF dengan nama sama untuk dilihat di HP. |
+| `desain-konstruksi/gambar-teknik/GT-02-Kawasan-Pagar-Gerbang.dxf` | Rencana tapak 100 x 400 m, tata letak zona, unit kandang + umbaran, detail pagar harmonika + tiang beton, gerbang dan bak celup kendaraan. |
+| `desain-konstruksi/gambar-teknik/GT-03-Fasilitas-Peternakan.dxf` | Gudang tipikal, kantor + pos jaga, ruang ganti, rumah kompos, unit BSF, karantina, lantai jemur, menara tandon + sumur bor, rumah pompa, embung. |
+| `desain-konstruksi/RAB-Kawasan-Peternakan-KUB-Semi-Umbaran-Konawe-Selatan.xlsx` | RAB pola AHSP dengan harga dasar perkiraan Konawe Selatan: rekap, harga dasar, analisa, RAB kandang, fasilitas, pagar & umbaran, utilitas. |
+| `desain-konstruksi/3d/` | Gambar render 3D (kawasan, zona servis, unit kandang, potongan, rangka atap) dan file HTML model 3D interaktif. |
 
 Catatan: angka di RAB dan dashboard adalah perkiraan perencanaan. Harga bahan perlu dicek ulang ke toko bangunan, toko pakan, dan pemasok setempat sebelum dipakai untuk keputusan.
 

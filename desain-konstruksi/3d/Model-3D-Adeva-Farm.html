@@ -1,0 +1,389 @@
+<title>Adeva Farm 3D</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: aplikasi satu layar - bilah atas (judul + pilihan tampilan), kanvas 3D penuh, panel keterangan melayang di kiri bawah */
+:root {
+  --bg: #eef0ec; --panel: #ffffffee; --fg: #1f2723; --muted: #5d6a63; --line: #d3d9d3;
+  --accent: #b4531a; --accent-ink: #ffffff; --sky: #dfe8ee;
+  --f-ui: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --f-data: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #141a17; --panel: #1d2420ee; --fg: #e4ebe6; --muted: #9aa8a0; --line: #34403a;
+  --accent: #e07a3c; --accent-ink: #141a17; --sky: #1b2530; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #141a17; --panel: #1d2420ee; --fg: #e4ebe6; --muted: #9aa8a0; --line: #34403a;
+  --accent: #e07a3c; --accent-ink: #141a17; --sky: #1b2530; color-scheme: dark }
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--fg); font-family: var(--f-ui); overflow: hidden; }
+.app { height: 100%; display: flex; flex-direction: column; }
+header { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; padding-block: 10px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  border-bottom: 1px solid var(--line); background: var(--bg); }
+h1 { margin: 0; font-size: 1.15rem; font-weight: 700; letter-spacing: .01em; text-wrap: balance; }
+h1 small { display: block; font-weight: 400; font-size: .78rem; color: var(--muted); letter-spacing: .02em; }
+.views { display: flex; gap: 6px; flex-wrap: wrap; }
+.views button, .toggle { font: 600 .85rem var(--f-ui); color: var(--fg); background: transparent; border: 1px solid var(--line);
+  border-radius: 999px; padding: 6px 13px; cursor: pointer; }
+.views button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.views button:focus-visible, .toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.toggle { display: inline-flex; gap: 6px; align-items: center; }
+.toggle input { accent-color: var(--accent); }
+.stage { position: relative; flex: 1; min-height: 0; }
+canvas { display: block; width: 100%; height: 100%; }
+.info { position: absolute; left: max(14px, env(safe-area-inset-left, 0px)); bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  width: min(330px, calc(100% - 28px)); background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+  padding: 12px 14px; backdrop-filter: blur(6px); }
+.info h2 { margin: 0 0 6px; font-size: .95rem; }
+.info dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font-size: .82rem; }
+.info dt { color: var(--muted); }
+.info dd { margin: 0; font-family: var(--f-data); font-size: .76rem; font-variant-numeric: tabular-nums; }
+.info p { margin: 8px 0 0; font-size: .78rem; color: var(--muted); }
+.hint { position: absolute; right: max(14px, env(safe-area-inset-right, 0px)); top: 12px; font-size: .75rem; color: var(--muted);
+  background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; }
+.lbl { font: 600 11px var(--f-ui); color: #1f2723; background: #ffffffd9; border: 1px solid #c9d0c9; border-radius: 4px;
+  padding: 1px 5px; white-space: nowrap; pointer-events: none; }
+@media (max-width: 560px) { .info { width: calc(100% - 28px); } .info dl { font-size: .76rem; } .hint { display: none; } }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+</style>
+
+<div class="app">
+  <header>
+    <h1>Adeva Farm 3D<small>Kawasan peternakan ayam KUB semi umbaran 10.000 ekor · Konawe Selatan</small></h1>
+    <div class="views" role="group" aria-label="Pilih tampilan">
+      <button id="v-kawasan" data-view="kawasan" aria-pressed="true">Kawasan 4 ha</button>
+      <button id="v-kandang" data-view="kandang" aria-pressed="false">Unit kandang + umbaran</button>
+      <button id="v-potongan" data-view="potongan" aria-pressed="false">Potongan kandang</button>
+    </div>
+    <label class="toggle" for="t-rangka"><input id="t-rangka" type="checkbox"> Tampilkan rangka atap</label>
+    <label class="toggle" for="t-label"><input id="t-label" type="checkbox" checked> Label</label>
+  </header>
+  <div class="stage" id="stage">
+    <div class="hint">Seret untuk memutar · cubit/gulir untuk zoom</div>
+    <div class="info" id="info"></div>
+  </div>
+</div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+
+const stage = document.getElementById('stage');
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.localClippingEnabled = true;
+stage.prepend(renderer.domElement);
+const labelR = new CSS2DRenderer();
+labelR.domElement.style.position = 'absolute'; labelR.domElement.style.inset = '0'; labelR.domElement.style.pointerEvents = 'none';
+stage.appendChild(labelR.domElement);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 3000);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true; controls.maxPolarAngle = Math.PI * 0.49;
+
+scene.add(new THREE.HemisphereLight(0xeef6ff, 0x8a7a5a, 1.1));
+const sun = new THREE.DirectionalLight(0xffffff, 1.6);
+sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+scene.add(sun); scene.add(sun.target);
+
+const TAN = Math.tan(25 * Math.PI / 180);
+const M = (c, o = {}) => new THREE.MeshStandardMaterial({ color: c, roughness: .85, ...o });
+const mat = {
+  tanah: M(0xc9b07f), rumput: M(0x8fbf6a), umbaran: M(0xa6cc7f), jalan: M(0xd2cab6), beton: M(0xbdbab2),
+  bata: M(0xb8653f), plester: M(0xece7dc), galva: M(0xb3bcc4, { metalness: .55, roughness: .38, side: THREE.DoubleSide }),
+  terpal: M(0x2f6ea6, { side: THREE.DoubleSide }), kayu: M(0x9a6a3c), air: M(0x5b9bd0, { roughness: .2, metalness: .1 }),
+  baja: new THREE.LineBasicMaterial({ color: 0xc23f8a }), daun: M(0x4f8a3f), batang: M(0x6d4a2b), jagung: M(0xbfc35e),
+  hijau: M(0x6fa85a), lantaiJemur: M(0xcfccc4), pakan: M(0xd9c27a), minum: M(0x2f7fd0), sarang: M(0xa8743f)
+};
+function meshTexture(color, cell = 8, alpha = .9) {
+  const c = document.createElement('canvas'); c.width = c.height = 64; const g = c.getContext('2d');
+  g.strokeStyle = color; g.globalAlpha = alpha; g.lineWidth = 2;
+  for (let i = 0; i <= 64; i += cell) { g.beginPath(); g.moveTo(i, 0); g.lineTo(64, 64 - i); g.stroke(); g.beginPath(); g.moveTo(0, i); g.lineTo(64 - i, 64); g.stroke();
+    g.beginPath(); g.moveTo(i, 64); g.lineTo(64, i); g.stroke(); g.beginPath(); g.moveTo(0, 64 - i); g.lineTo(64 - i, 0); g.stroke(); }
+  const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+const kawatTex = meshTexture('#7f8a90', 8);
+function kawatMat(w, h, k = 1.2) {
+  const t = kawatTex.clone(); t.needsUpdate = true; t.repeat.set(w / k, h / k);
+  return new THREE.MeshStandardMaterial({ map: t, transparent: true, alphaTest: .3, side: THREE.DoubleSide, roughness: .6, metalness: .4 });
+}
+function rowsTexture() {
+  const c = document.createElement('canvas'); c.width = 64; c.height = 64; const g = c.getContext('2d');
+  g.fillStyle = '#c6b77a'; g.fillRect(0, 0, 64, 64); g.fillStyle = '#7fae4a';
+  for (let y = 0; y < 64; y += 16) g.fillRect(0, y, 64, 9);
+  const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+const box = (w, h, d, m, x, y, z, parent, shadow = true) => {
+  const o = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m); o.position.set(x, y, z);
+  o.castShadow = shadow; o.receiveShadow = true; parent.add(o); return o;
+};
+const plane = (w, d, m, x, y, z, parent) => {
+  const o = new THREE.Mesh(new THREE.PlaneGeometry(w, d), m); o.rotation.x = -Math.PI / 2; o.position.set(x, y, z); o.receiveShadow = true; parent.add(o); return o;
+};
+function quad(p, m, parent) {           // 4 titik [x,y,z]
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute([...p[0], ...p[1], ...p[2], ...p[0], ...p[2], ...p[3]], 3));
+  g.setAttribute('uv', new THREE.Float32BufferAttribute([0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1], 2));
+  g.computeVertexNormals(); const o = new THREE.Mesh(g, m); o.castShadow = true; o.receiveShadow = true; parent.add(o); return o;
+}
+const labels = [];
+function label(text, x, y, z, parent) {
+  const d = document.createElement('div'); d.className = 'lbl'; d.textContent = text;
+  const o = new CSS2DObject(d); o.position.set(x, y, z); parent.add(o); labels.push(o); return o;
+}
+function trees(parent, pts, scale = 1) {
+  const n = pts.length; if (!n) return;
+  const trunk = new THREE.InstancedMesh(new THREE.CylinderGeometry(.12 * scale, .18 * scale, 2.2 * scale, 6), mat.batang, n);
+  const crown = new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1.6 * scale, 0), mat.daun, n);
+  const m4 = new THREE.Matrix4();
+  pts.forEach(([x, z, s = 1], i) => {
+    m4.makeScale(s, s, s).setPosition(x, 1.1 * scale * s, z); trunk.setMatrixAt(i, m4);
+    m4.makeScale(s, s * .85, s).setPosition(x, 2.9 * scale * s, z); crown.setMatrixAt(i, m4);
+  });
+  trunk.castShadow = crown.castShadow = true; parent.add(trunk, crown);
+}
+function fence(parent, pts, h = 1.8, postMat = mat.beton) {   // pts [[x,z],...]
+  const posts = [];
+  for (let i = 0; i < pts.length - 1; i++) {
+    const [x1, z1] = pts[i], [x2, z2] = pts[i + 1]; const L = Math.hypot(x2 - x1, z2 - z1);
+    const n = Math.max(1, Math.round(L / 2.5));
+    for (let k = 0; k <= n; k++) posts.push([x1 + (x2 - x1) * k / n, z1 + (z2 - z1) * k / n]);
+    const pm = new THREE.Mesh(new THREE.PlaneGeometry(L, h), kawatMat(L, h, 1.0));
+    pm.position.set((x1 + x2) / 2, h / 2, (z1 + z2) / 2); pm.rotation.y = -Math.atan2(z2 - z1, x2 - x1); parent.add(pm);
+  }
+  const im = new THREE.InstancedMesh(new THREE.BoxGeometry(.1, h + .1, .1), postMat, posts.length); const m4 = new THREE.Matrix4();
+  posts.forEach(([x, z], i) => { m4.makeTranslation(x, (h + .1) / 2, z); im.setMatrixAt(i, m4); }); im.castShadow = true; parent.add(im);
+}
+
+/* ---------------- KANDANG 10 x 40 m (lokal: x 0-40, z 0 = dinding selatan/umbaran, z 10 = utara) ---------------- */
+function kandang(detail = true, starter = false) {
+  const g = new THREE.Group(); const F = .30, RB = F + 2.70, L = 40, B = 10;
+  box(L + .3, F, B + .3, mat.beton, L / 2, F / 2, B / 2, g);
+  const cols = []; for (let x = 0; x <= L; x += 4) cols.push([x, 0], [x, B]); cols.push([0, 5], [L, 5]);
+  cols.forEach(([x, z]) => box(.15, 2.5, .15, mat.beton, x, F + 1.25, z, g));
+  box(L + .15, .2, .15, mat.beton, L / 2, F + 2.6, 0, g); box(L + .15, .2, .15, mat.beton, L / 2, F + 2.6, B, g);
+  box(.15, .2, B, mat.beton, 0, F + 2.6, B / 2, g); box(.15, .2, B, mat.beton, L, F + 2.6, B / 2, g);
+  // dinding bata 50 cm (bukaan pintu umbaran di sisi selatan, pintu utama di ujung)
+  const pu = [6, 10, 14, 18, 22, 26, 30, 34];
+  let x0 = 0; [...pu.map(x => [x - .2, x + .2]), [L, L]].forEach(([a, b]) => { if (a > x0) box(a - x0, .5, .14, mat.plester, (a + x0) / 2, F + .25, 0, g); x0 = b; });
+  box(L, .5, .14, mat.plester, L / 2, F + .25, B, g);
+  [0, L].forEach(x => { box(.14, .5, 3.6, mat.plester, x, F + .25, 1.8, g); box(.14, .5, 5.2, mat.plester, x, F + .25, 7.4, g); });
+  // kawat harmonika
+  const km = (w) => kawatMat(w, 2.0);
+  [[0], [B]].forEach(([z]) => { const p = new THREE.Mesh(new THREE.PlaneGeometry(L, 2), km(L)); p.position.set(L / 2, F + 1.5, z); g.add(p); });
+  [0, L].forEach(x => { const p = new THREE.Mesh(new THREE.PlaneGeometry(B, 2), km(B)); p.position.set(x, F + 1.5, B / 2); p.rotation.y = Math.PI / 2; g.add(p); });
+  // gevel kawat
+  [0, L].forEach(x => { const sh = new THREE.Shape([new THREE.Vector2(0, 0), new THREE.Vector2(B, 0), new THREE.Vector2(B / 2, B / 2 * TAN)]);
+    const m = new THREE.Mesh(new THREE.ShapeGeometry(sh), kawatMat(B, 2.3)); m.rotation.y = -Math.PI / 2; m.position.set(x, RB, 0); g.add(m); });
+  // tirai: utara setengah tertutup, selatan tergulung
+  const tir = new THREE.Mesh(new THREE.PlaneGeometry(L / 2, 1.1), mat.terpal); tir.position.set(L * .75, F + 1.15, B + .1); g.add(tir);
+  const roll = new THREE.Mesh(new THREE.CylinderGeometry(.06, .06, L, 8), mat.terpal); roll.rotation.z = Math.PI / 2; roll.position.set(L / 2, F + .62, -.1); g.add(roll);
+  // atap
+  const ov = 1, mh = .8, me = .4, gx = .5;
+  const yE = RB - ov * TAN, yT = RB + (B / 2 - mh) * TAN, yG = yT + .4, yA = yG + mh * TAN, yME = yG - me * TAN;
+  const roofG = new THREE.Group(); g.add(roofG);
+  const xa = -gx, xb = L + gx;
+  quad([[xa, yE, -ov], [xb, yE, -ov], [xb, yT, B / 2 - mh], [xa, yT, B / 2 - mh]], mat.galva, roofG);
+  quad([[xa, yE, B + ov], [xa, yT, B / 2 + mh], [xb, yT, B / 2 + mh], [xb, yE, B + ov]], mat.galva, roofG);
+  quad([[xa, yME, B / 2 - mh - me], [xb, yME, B / 2 - mh - me], [xb, yA, B / 2], [xa, yA, B / 2]], mat.galva, roofG);
+  quad([[xa, yME, B / 2 + mh + me], [xa, yA, B / 2], [xb, yA, B / 2], [xb, yME, B / 2 + mh + me]], mat.galva, roofG);
+  [B / 2 - mh, B / 2 + mh].forEach(z => { const p = new THREE.Mesh(new THREE.PlaneGeometry(L + 1, .4), kawatMat(L, .4)); p.position.set(L / 2, yT + .2, z); g.add(p); });
+  g.userData.roof = roofG;
+  // rangka kuda-kuda baja ringan tiap 1,2 m
+  const pts = [];
+  for (let x = 0; x <= L + .01; x += 1.2) {
+    const ry = z => RB + (B / 2 - Math.abs(z - B / 2)) * TAN;
+    pts.push(x, RB, 0, x, RB, B, x, yE, -ov, x, ry(B / 2), B / 2, x, ry(B / 2), B / 2, x, yE, B + ov);
+    for (let i = 1; i < 8; i++) { const z = i * 1.25; pts.push(x, RB, z, x, ry(z), z); const z2 = z + (z < B / 2 ? 1.25 : -1.25); pts.push(x, RB, z, x, ry(z2), z2); }
+    pts.push(x, ry(B / 2), B / 2, x, yA, B / 2, x, yME, B / 2 - mh - me, x, yA, B / 2, x, yA, B / 2, x, yME, B / 2 + mh + me);
+  }
+  const lg = new THREE.BufferGeometry(); lg.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
+  const truss = new THREE.LineSegments(lg, mat.baja); truss.visible = false; g.add(truss); g.userData.truss = truss;
+  // pintu umbaran + titian
+  pu.forEach(x => { box(.4, .05, .04, mat.kayu, x, F + .5, -.02, g, false); const r = box(.3, .03, 1.05, mat.kayu, x, F / 2, -.52, g); r.rotation.x = -Math.atan2(F, 1); });
+  // pintu utama
+  [0, L].forEach(x => box(.05, 2, 1.2, mat.kayu, x, F + 1, 4.2, g));
+  if (detail) {
+    box(39, 1.05, .35, mat.sarang, L / 2, F + 1.02, B - .25, g);
+    for (let x = .5; x < L; x += 1) {
+      [3.5, 6.5].forEach(z => { const c = new THREE.Mesh(new THREE.CylinderGeometry(.18, .12, .35, 10), mat.pakan); c.position.set(x, F + .45, z); g.add(c); });
+      const d = new THREE.Mesh(new THREE.CylinderGeometry(.12, .12, .3, 8), mat.minum); d.position.set(x, F + .15, 5); g.add(d);
+    }
+    [[3, 1.5], [23, 1.5]].forEach(([x, z]) => { for (let k = 0; k < 3; k++) box(14, .05, .05, mat.kayu, x + 7, F + .3 + k * .3, z + .5 - k * .17 * 0, g, false); });
+    for (let i = 0; i < 60; i++) { const h = new THREE.Mesh(new THREE.SphereGeometry(.13, 6, 5), M(0x8a4f22)); h.position.set(2 + (i * 7.31) % 36, F + .13, 1 + (i * 3.17) % 8); g.add(h); }
+  }
+  return g;
+}
+
+/* ---------------- UMBARAN 45 x 38 m (lokal: x 0-45, z 0-38, kandang di z < 0) ---------------- */
+function umbaran(parent, x0, z0, w = 45, d = 38, nTrees = true) {
+  plane(w, d, mat.umbaran, x0 + w / 2, .02, z0 + d / 2, parent);
+  fence(parent, [[x0, z0], [x0, z0 + d], [x0 + w, z0 + d], [x0 + w, z0]]);
+  if (nTrees) { const p = []; for (let r = 1; r <= 3; r++) for (let i = 0; i < 6; i++) p.push([x0 + 4 + i * (w - 8) / 5, z0 + d * r / 4, .7]); trees(parent, p, 1); }
+}
+
+function bangunan(parent, x, z, w, d, name, opts = {}) {   // x,z sudut, w sepanjang x
+  const g = new THREE.Group(); const H = opts.h ?? 3.0, F = .3;
+  box(w, F, d, mat.beton, x + w / 2, F / 2, z + d / 2, g);
+  if (opts.open) {
+    [[x, z], [x + w, z], [x, z + d], [x + w, z + d]].forEach(([a, b]) => box(.15, H, .15, mat.beton, a, F + H / 2, b, g));
+    box(w, 1, .14, mat.plester, x + w / 2, F + .5, z + d, g);
+  } else box(w, H, d, mat.plester, x + w / 2, F + H / 2, z + d / 2, g);
+  const ov = .8, yE = F + H + .2 - ov * TAN, span = Math.min(w, d), along = w >= d;
+  const r = span / 2 + ov, yR = F + H + .2 + span / 2 * TAN;
+  if (along) {
+    quad([[x - .5, yE, z - ov], [x + w + .5, yE, z - ov], [x + w + .5, yR, z + d / 2], [x - .5, yR, z + d / 2]], mat.galva, g);
+    quad([[x - .5, yE, z + d + ov], [x - .5, yR, z + d / 2], [x + w + .5, yR, z + d / 2], [x + w + .5, yE, z + d + ov]], mat.galva, g);
+  } else {
+    quad([[x - ov, yE, z - .5], [x + w / 2, yR, z - .5], [x + w / 2, yR, z + d + .5], [x - ov, yE, z + d + .5]], mat.galva, g);
+    quad([[x + w + ov, yE, z - .5], [x + w + ov, yE, z + d + .5], [x + w / 2, yR, z + d + .5], [x + w / 2, yR, z - .5]], mat.galva, g);
+  }
+  parent.add(g); if (name) label(name, x + w / 2, yR + 1.5, z + d / 2, parent); return g;
+}
+
+/* ---------------- KAWASAN 100 x 400 m (x melintang, z dari jalan) ---------------- */
+function kawasan() {
+  const g = new THREE.Group();
+  plane(160, 470, mat.rumput, 50, -.05, 190, g);
+  plane(140, 10, mat.jalan, 50, 0, -9, g); label('Jalan desa', 50, 2, -9, g);
+  plane(100, 50, mat.jalan, 50, .01, 25, g);
+  plane(4, 330, mat.jalan, 98, .02, 165, g);
+  plane(4, 157.5, mat.jalan, 49, .02, 128.75, g);
+  // zona servis
+  const S = [['Parkir', 4, 4, 18, 14, 'parkir'], ['Kantor', 26, 4, 8, 6], ['Gudang telur', 32, 14, 12, 8], ['Menara tandon', 4, 24, 4, 4, 'tandon'],
+             ['Ruang ganti', 38, 46, 6, 4], ['Lantai jemur', 54, 3, 40, 18, 'jemur'], ['Olah pakan', 54, 25, 16, 12], ['Gudang jagung', 74, 25, 20, 12], ['Gudang pakan', 56, 39, 20, 10]];
+  S.forEach(([n, x, z, w, d, t]) => {
+    if (t === 'parkir') { plane(w, d, mat.beton, x + w / 2, .03, z + d / 2, g); label(n, x + w / 2, 1.5, z + d / 2, g); }
+    else if (t === 'jemur') { box(w, .15, d, mat.lantaiJemur, x + w / 2, .08, z + d / 2, g, false); label(n, x + w / 2, 1.5, z + d / 2, g); }
+    else if (t === 'tandon') { [[0, 0], [1.8, 0], [0, 1.8], [1.8, 1.8]].forEach(([a, b]) => box(.2, 6, .2, mat.beton, x + 1 + a, 3, z + 1 + b, g));
+      box(2.4, .15, 2.4, mat.beton, x + 1.9, 6.05, z + 1.9, g);
+      [0, 1.2].forEach(a => { const c = new THREE.Mesh(new THREE.CylinderGeometry(.68, .68, 1.7, 16), M(0x2c5d8f)); c.position.set(x + 1.3 + a, 7, z + 1.9); c.castShadow = true; g.add(c); });
+      label(n, x + 2, 9.5, z + 2, g); }
+    else bangunan(g, x, z, w, d, n);
+  });
+  // zona kandang
+  const cols = [[2, 47], [51, 96]], kx = [4.5, 53.5], names = [['L1', 'L3', 'L5'], ['L2', 'L4', 'G (starter)']];
+  for (let c = 0; c < 2; c++) for (let r = 0; r < 3; r++) {
+    const yk = 53 + 51.5 * r;
+    const k = kandang(false, names[c][r].startsWith('G')); k.rotation.y = Math.PI; k.position.set(kx[c] + 40, 0, yk + 10); g.add(k); kandangs.push(k);
+    umbaran(g, cols[c][0], yk + 10, 45, 38);
+    label('Kandang ' + names[c][r], kx[c] + 20, 7.5, yk + 5, g);
+  }
+  fence(g, [[46, 50], [2, 50], [2, 207.5], [92, 207.5]], 1.8); fence(g, [[96, 207.5], [96, 50], [54, 50]], 1.8);
+  // zona kotor
+  [['Rumah kompos', 78, 213, 16, 10, { open: true }], ['Maggot BSF', 62, 213, 12, 8], ['Karantina', 82, 230, 8, 6]].forEach(([n, x, z, w, d, o]) => bangunan(g, x, z, w, d, n, o || {}));
+  plane(54, 35, mat.hijau, 29, .03, 227.5, g); label('Kebun indigofera / lamtoro', 29, 2, 227.5, g);
+  { const p = []; for (let i = 0; i < 9; i++) for (let j = 0; j < 5; j++) p.push([5 + i * 6, 214 + j * 7, .45]); trees(g, p, 1); }
+  // kebun jagung
+  const rt = rowsTexture();
+  [[2, 248, 45, 52, 'Jagung A'], [51, 248, 45, 52, 'Jagung B'], [51, 303, 45, 27, 'Jagung C']].forEach(([x, z, w, d, n]) => {
+    const t = rt.clone(); t.needsUpdate = true; t.repeat.set(w / 4, d / 4);
+    plane(w, d, new THREE.MeshStandardMaterial({ map: t, roughness: .95 }), x + w / 2, .04, z + d / 2, g); label(n, x + w / 2, 2, z + d / 2, g); });
+  // embung
+  plane(30, 20, M(0x9b8a63), 21, .02, 316, g); plane(26, 16, mat.air, 21, .06, 316, g); label('Embung', 21, 2, 316, g);
+  bangunan(g, 40, 313, 3, 3, 'Rumah pompa');
+  // sabuk hijau + sungai + seberang
+  { const p = []; for (let i = 0; i < 17; i++) for (let j = 0; j < 2; j++) p.push([3 + i * 6 + j * 3, 333 + j * 6, .9]); trees(g, p, 1.2); }
+  const sh = new THREE.Shape(); const top = [], bot = [];
+  for (let i = 0; i <= 40; i++) { const x = -30 + i * 4; const yu = 346 - 5 * Math.sin(Math.PI * (x + 10) / 70); top.push([x, yu]); bot.push([x, yu + 17]); }
+  sh.moveTo(top[0][0], -top[0][1]); top.forEach(([x, y]) => sh.lineTo(x, -y)); bot.reverse().forEach(([x, y]) => sh.lineTo(x, -y));
+  const river = new THREE.Mesh(new THREE.ShapeGeometry(sh), mat.air); river.rotation.x = -Math.PI / 2; river.position.y = .05; g.add(river);
+  label('Sungai', 50, 2, 355, g);
+  { const p = []; for (let i = 0; i < 16; i++) for (let j = 0; j < 4; j++) p.push([4 + i * 6.2 + (j % 2) * 3, 372 + j * 7, .8]); trees(g, p, 1.1); }
+  box(1.5, .2, 22, mat.kayu, 74, .4, 356, g); label('Jembatan titian (opsional)', 74, 2.5, 356, g);
+  // pagar keliling
+  fence(g, [[46, 0], [0, 0], [0, 343]], 1.8); fence(g, [[54, 0], [96, 0]], 1.8); fence(g, [[100, 0], [100, 350]], 1.8);
+  return g;
+}
+
+/* ---------------- tampilan ---------------- */
+const kandangs = [];
+let world = null, roots = {};
+const INFO = {
+  kawasan: ['Kawasan 4 ha (100 x 400 m)', [['Zona servis', '0,50 ha (dekat jalan)'], ['Zona kandang', '±1,55 ha, 6 kandang + umbaran'], ['Zona kotor', 'kompos, maggot BSF, karantina'],
+    ['Kebun', 'jagung 0,59 ha + embung'], ['Tepi sungai', 'sabuk hijau, tanpa bangunan'], ['Pagar', 'kawat harmonika 1,8 m']],
+    'Urutan dari jalan ke sungai: servis - kandang - zona kotor - kebun - sungai. Arah utara diasumsikan ke jalan.'],
+  kandang: ['Unit kandang + umbaran', [['Kandang', '10 x 40 m, 2.000 ekor (5/m²)'], ['Struktur', 'kolom 15/15, ring balk 15/20, K-225'], ['Dinding', 'bata 50 cm + kawat 1" 200 cm'],
+    ['Atap', 'baja ringan + galvalum 0,30, monitor'], ['Umbaran', '45 x 38 m, 18 pohon peneduh'], ['Pintu umbaran', '8 x (40 x 45 cm) + titian']],
+    'Gambar kerja: GT-01 K-01 s/d K-09 dan GT-02 S-03.'],
+  potongan: ['Potongan kandang', [['Lantai', 'rabat K-175 t 7 cm, peil +30'], ['Tinggi kolom', '250 cm, ring balk +270'], ['Puncak monitor', '+543 cm'],
+    ['Celah monitor', '40 cm + kawat harmonika'], ['Overstek', '100 cm'], ['Kuda-kuda', 'C75.75 jarak 120 cm']],
+    'Centang "Tampilkan rangka atap" untuk melihat kuda-kuda baja ringan.']
+};
+function setInfo(v) {
+  const [t, rows, note] = INFO[v];
+  document.getElementById('info').innerHTML = `<h2>${t}</h2><dl>${rows.map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join('')}</dl><p>${note}</p>`;
+}
+function clearWorld() { if (world) { scene.remove(world); } labels.forEach(o => o.element.remove()); labels.length = 0; kandangs.length = 0; }
+const clip = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 20);
+function show(v) {
+  clearWorld();
+  document.querySelectorAll('.views button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === v)));
+  setInfo(v);
+  world = new THREE.Group(); scene.add(world);
+  renderer.clippingPlanes = [];
+  if (v === 'kawasan') {
+    world.add(kawasan());
+    camera.position.set(-95, 135, -70); controls.target.set(50, 0, 150);
+    sun.position.set(-120, 220, 40); sun.target.position.set(50, 0, 160);
+    Object.assign(sun.shadow.camera, { left: -230, right: 230, top: 230, bottom: -230, near: 10, far: 700 });
+    scene.fog = null;
+  } else {
+    plane(140, 120, mat.rumput, 22, -.05, 20, world);
+    const k = kandang(true); world.add(k); kandangs.push(k);
+    k.rotation.y = Math.PI; k.position.set(40, 0, 10);
+    umbaran(world, -2.5, 10, 45, 38);
+    plane(51, 3, mat.jalan, 20, .02, -1.5, world);
+    label('Kandang L1 · 10 x 40 m', 20, 7, 5, world); label('Umbaran 45 x 38 m', 20, 2.5, 30, world);
+    if (v === 'potongan') {
+      renderer.clippingPlanes = [clip];
+      camera.position.set(34, 9, -14); controls.target.set(20, 2.5, 5);
+    } else {
+      camera.position.set(-26, 22, 62); controls.target.set(20, 1.5, 14);
+    }
+    sun.position.set(-30, 60, 40); sun.target.position.set(20, 0, 15);
+    Object.assign(sun.shadow.camera, { left: -60, right: 60, top: 60, bottom: -60, near: 1, far: 200 });
+  }
+  sun.shadow.camera.updateProjectionMatrix();
+  applyToggles(); controls.update();
+}
+function applyToggles() {
+  const r = document.getElementById('t-rangka').checked;
+  kandangs.forEach(k => { k.userData.truss.visible = r; k.userData.roof.visible = !r; });
+  const l = document.getElementById('t-label').checked;
+  labels.forEach(o => o.visible = l);
+}
+document.querySelectorAll('.views button').forEach(b => b.addEventListener('click', () => { show(b.dataset.view); try { localStorage.setItem('adeva3d-view', b.dataset.view); } catch (e) {} }));
+document.getElementById('t-rangka').addEventListener('change', applyToggles);
+document.getElementById('t-label').addEventListener('change', applyToggles);
+
+function bg() { const c = getComputedStyle(document.documentElement).getPropertyValue('--sky').trim() || '#dfe8ee'; scene.background = new THREE.Color(c); }
+bg(); try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', bg); } catch (e) {}
+new MutationObserver(bg).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+function resize() {
+  const w = stage.clientWidth, h = stage.clientHeight;
+  renderer.setSize(w, h, false); labelR.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(stage); resize();
+let start = (location.hash || '').replace('#', '');
+if (!INFO[start]) { try { start = localStorage.getItem('adeva3d-view') || 'kawasan'; } catch (e) { start = 'kawasan'; } if (!INFO[start]) start = 'kawasan'; }
+if (/rangka/.test(location.hash)) document.getElementById('t-rangka').checked = true;
+show(start.replace('-rangka', ''));
+renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); labelR.render(scene, camera); });
+window.__show = (v, rangka, cam) => { document.getElementById('t-rangka').checked = !!rangka; show(v);
+  if (cam) { camera.position.set(...cam[0]); controls.target.set(...cam[1]); controls.update(); } };
+window.__ready = true;
+</script>
