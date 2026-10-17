@@ -32,6 +32,8 @@ Kode program (file `.ts`, `.json`, `.jsonc`) tetap berbahasa Inggris karena diba
 | `desain-konstruksi/gambar-teknik/GT-02-Kawasan-Pagar-Gerbang.dxf` | Rencana tapak 100 x 400 m, tata letak zona, unit kandang + umbaran, detail pagar harmonika + tiang beton, gerbang dan bak celup kendaraan. |
 | `desain-konstruksi/gambar-teknik/GT-03-Fasilitas-Peternakan.dxf` | Gudang jagung (gudang tipikal) + tabel semua bangunan, ruang ganti, kandang karantina, lantai jemur, menara tandon + sumur bor, rumah pompa, embung. |
 | `desain-konstruksi/RAB-Kawasan-Peternakan-KUB-Semi-Umbaran-Konawe-Selatan.xlsx` | RAB pola AHSP dengan harga dasar perkiraan Konawe Selatan: rekap, harga dasar, analisa, RAB kandang, 11 bangunan pendukung (sesuai GT-03 dan GT-04), pagar & umbaran, utilitas. Total sekitar Rp 5,91 miliar. |
+| `animasi-sop/Animasi-SOP-Anak-Kandang-1080p.mp4` | Animasi sinematik "Sehari Bersama Anak Kandang": SOP harian 07.00–16.00 (16 langkah), kamera mengikuti pekerja kandang, durasi 3 menit 6 detik. Versi 4K (3840 x 2160) dengan nama `...-4K.mp4` bila tersedia. |
+| `animasi-sop/musik-country-orisinal.mp3` | Musik latar instrumental bergaya country, komposisi orisinal (bukan lagu berhak cipta). |
 | `desain-konstruksi/3d/` | Gambar render 3D (kawasan, zona servis, unit kandang, potongan, rangka atap) dan file HTML model 3D interaktif. |
 
 Catatan: angka di RAB dan dashboard adalah perkiraan perencanaan. Harga bahan perlu dicek ulang ke toko bangunan, toko pakan, dan pemasok setempat sebelum dipakai untuk keputusan.
