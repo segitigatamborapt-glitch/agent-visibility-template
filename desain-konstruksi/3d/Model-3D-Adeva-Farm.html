@@ -262,8 +262,9 @@ function kawasan() {
   plane(4, 330, mat.jalan, 98, .02, 165, g);
   plane(4, 157.5, mat.jalan, 49, .02, 128.75, g);
   // zona servis
-  const S = [['Parkir', 4, 4, 18, 14, 'parkir'], ['Kantor', 26, 4, 8, 6], ['Gudang telur', 32, 14, 12, 8], ['Menara tandon', 4, 24, 4, 4, 'tandon'],
-             ['Ruang ganti', 38, 46, 6, 4], ['Lantai jemur', 54, 3, 40, 18, 'jemur'], ['Olah pakan', 54, 25, 16, 12], ['Gudang jagung', 74, 25, 20, 12], ['Gudang pakan', 56, 39, 20, 10]];
+  const S = [['Pos jaga', 41, 1.5, 4, 3], ['Parkir', 4, 4, 18, 14, 'parkir'], ['Kantor', 26, 4, 8, 6], ['Rumah telur', 32, 15, 12, 8], ['Menara tandon', 4, 24, 4, 4, 'tandon'],
+             ['Mes anak kandang', 12, 30, 12, 8], ['Ruang ganti', 38, 46, 6, 4], ['Lantai jemur', 54, 3, 40, 18, 'jemur'], ['Rumah pakan', 54, 25, 16, 12],
+             ['Gudang jagung', 74, 25, 20, 12], ['Gudang pakan', 54, 40, 20, 10]];
   S.forEach(([n, x, z, w, d, t]) => {
     if (t === 'parkir') { plane(w, d, mat.beton, x + w / 2, .03, z + d / 2, g); label(n, x + w / 2, 1.5, z + d / 2, g); }
     else if (t === 'jemur') { box(w, .15, d, mat.lantaiJemur, x + w / 2, .08, z + d / 2, g, false); label(n, x + w / 2, 1.5, z + d / 2, g); }
@@ -281,9 +282,9 @@ function kawasan() {
     umbaran(g, cols[c][0], yk + 10, 45, 38);
     label('Kandang ' + names[c][r], kx[c] + 20, 7.5, yk + 5, g);
   }
-  fence(g, [[46, 50], [2, 50], [2, 207.5], [92, 207.5]], 1.8); fence(g, [[96, 207.5], [96, 50], [54, 50]], 1.8);
+  fence(g, [[46, 50], [2, 50], [2, 207.5], [92, 207.5]], 1.8); fence(g, [[96, 207.5], [96, 50], [74, 50]], 1.8); fence(g, [[54, 50], [51, 50]], 1.8);
   // zona kotor
-  [['Rumah kompos', 78, 213, 16, 10, { open: true }], ['Maggot BSF', 62, 213, 12, 8], ['Karantina', 82, 230, 8, 6]].forEach(([n, x, z, w, d, o]) => bangunan(g, x, z, w, d, n, o || {}));
+  [['Rumah kompos', 78, 213, 16, 10, { open: true }], ['Rumah maggot BSF', 62, 213, 12, 8], ['Karantina', 82, 230, 8, 6]].forEach(([n, x, z, w, d, o]) => bangunan(g, x, z, w, d, n, o || {}));
   plane(54, 35, mat.hijau, 29, .03, 227.5, g); label('Kebun indigofera / lamtoro', 29, 2, 227.5, g);
   { const p = []; for (let i = 0; i < 9; i++) for (let j = 0; j < 5; j++) p.push([5 + i * 6, 214 + j * 7, .45]); trees(g, p, 1); }
   // kebun jagung
