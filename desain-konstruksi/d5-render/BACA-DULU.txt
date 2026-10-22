@@ -1,0 +1,18 @@
+MODEL 3D ADEVA FARM UNTUK D5 RENDER (dan aplikasi render lain)
+
+File yang dipakai
+- *.glb : paling lengkap (warna, kawat harmonika tembus pandang). Coba impor ini dulu di D5.
+- *-OBJ.zip : cadangan format OBJ + MTL. Ekstrak dulu, lalu impor MODEL.obj (MODEL.mtl harus satu folder).
+  Kawat harmonika tidak ikut di OBJ, hanya ada di GLB.
+
+Isi
+- Adeva-Farm-Kawasan-4ha : seluruh kawasan 100 x 400 m (zona servis, 6 kandang + umbaran, zona kotor, kebun, embung, sungai, pagar).
+- Adeva-Farm-Unit-Kandang-Umbaran : satu unit kandang 10 x 40 m dengan umbaran 45 x 38 m (atap tertutup).
+- Adeva-Farm-Unit-Kandang-Rangka-Atap.glb : unit yang sama, atap diganti rangka baja ringan.
+
+Catatan
+- Satuan meter, sumbu Y ke atas. Setelah impor, cek ukuran: lebar kandang harus 10 m dan panjang 40 m.
+- Warna masih warna dasar tanpa tekstur foto. Ganti material (genteng/galvalum, beton, rumput, air) dengan pustaka material D5.
+- Pohon masih bentuk sederhana. Ganti dengan pohon dan rumput dari pustaka D5 supaya hasil render realistis.
+- Bentuk dan ukuran mengikuti gambar kerja GT-00 s/d GT-04. Ini model perencanaan, bukan gambar detail konstruksi.
+- Belum diuji langsung di D5 (hanya diuji dibaca ulang dan dirender di peramban).
